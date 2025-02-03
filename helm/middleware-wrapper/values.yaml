@@ -4,6 +4,10 @@ sb-swip-middleware:
   postgresql-ha:
     enabled: false
   mongodb:
+    auth:
+      rootPassword: "password"
+    service:
+      type: LoadBalancer
     persistence:
       storageClass: local-path
       size: 1Gi
@@ -15,6 +19,8 @@ sb-swip-middleware:
         storageClass: local-path
         size: 1Gi
       brokers: 1
+      service:
+        type: LoadBalancer
     cp-zookeeper:
       persistence:
         dataDirSize: 1Gi
