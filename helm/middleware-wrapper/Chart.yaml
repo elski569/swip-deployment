@@ -3,7 +3,8 @@ description: A Helm chart for Kubernetes
 name: middleware-wrapper
 version: 0.1.0
 
+#exempel för hur man kan sätta upp på sin lokala maskin
 dependencies:
   - name: sb-swip-middleware
     version: 2.6.2
-    repository: https://github.com/Swibi/sb-helm-repo
+    repository: https://swibi.github.io/sb-helm-repo/
