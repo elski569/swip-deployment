@@ -1,6 +1,6 @@
-sb-swip-middleware:
+sb-swip-middleware:  
   postgresql:
-    enabled: true
+    enabled: false
   postgresql-ha:
     enabled: false
   mongodb:
@@ -23,7 +23,7 @@ sb-swip-middleware:
       servers: 1
 
   cloudnativepg:
-    enabled: false
+    enabled: true
     host: swim-rw.middleware
     user: postgres
     port: 5432

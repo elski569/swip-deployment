@@ -1,5 +1,8 @@
 sb-swip-platform:
+  # Admin Service configuration
+  # From manual setup: "The admin service is required to set up users, and getting data for them"
   sb-admin-service:
+    enabled: true
     cloudnativepg:
       enabled: true
       host: swim-restore-rw.cloud-pg
@@ -7,30 +10,38 @@ sb-swip-platform:
       swimbird:
         authorization:
           keycloak:
+            # Keycloak configuration matching manual setup
             baseUri: http://keycloak.keycloak:8090
             baseUris: http://keycloak.keycloak:8090
-    enabled: false
     image:
       tag: latest
       imagePullPolicy: Always
     tracing:
       enabled: false
+
+  #maybe not necessary  
   sb-private-assets:
     image:
       tag: latest
       imagePullPolicy: Always
     enabled: false
+
+  #maybe not necessary  
   sb-private-funds: 
     enabled: false
     image:
       tag: latest
       imagePullPolicy: Always
+
+  # Standalone Service configuration
+  # From manual setup: "Standalone is our backend service, which is a very big piece of software"
   sb-standalone:
-    enabled: false
+    enabled: true
     config:
       sb_services:
         authorization:
           keycloak:
+            # Keycloak configuration matching manual setup port forwards
             hostName: keycloak.keycloak
             adminPort: 8090
             clientPort: 8090
@@ -40,7 +51,13 @@ sb-swip-platform:
         featureFlags:
           useStrimziKafka: true
         layout:
-            profile_path: value-bridge
+          profile_path: value-bridge
+        # MongoDB configuration matching manual setup
+        mongodb:
+          username: root
+          password: password
+          authentication-database: admin
+          port: 27017
     cloudnativepg:
       enabled: true
       host: swim-restore-rw.cloud-pg
@@ -53,16 +70,17 @@ sb-swip-platform:
       redis:
         # standalone-cache-test in GCP
         host: 10.78.254.203
-  sb-swip-app :
-    enabled: false
+  sb-swip-app:
+    enabled: true
     image:
       tag: latest
       imagePullPolicy: Always
     config:
       USE_LEGACY_ACCOUNT_LIST: "false"
-      # Can be removed when default value is set in chart
-      # Falsy value is needed to show both market value and performance graph
       RESTRICT_DASHBOARD_CHART_VIEW: "false"
+      # Backend URLs matching the proxy.config.js setup from manual instructions
+      BACKEND_URL: "http://sb-standalone:8080"
+      ADMIN_BACKEND_URL: "http://sb-admin-service:7001"
   sb-accounting:
     enabled: false
     config:
@@ -106,3 +124,8 @@ sb-swip-platform:
       host: bbe5ik2wva.europe-west4.gcp.clickhouse.cloud
   sb-config-provider:
     enabled: true
+    
+  # Note: All storage classes are set to local-path as mentioned in manual setup:
+  # "The storage class for persistence in the middleware is set to local-path.
+  # This is one of the CRDs we installed earlier, which is used by Rancher
+  # to set up storage for databases and the like on local machines."
