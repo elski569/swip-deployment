@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: swip-app
+  labels:
+    app: swip-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: swip-app
+  template:
+    metadata:
+      labels:
+        app: swip-app
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+      - name: swip-app
+        image: swimbird/sb-swip-app:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80

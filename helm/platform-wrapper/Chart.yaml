@@ -1,0 +1,9 @@
+apiVersion: v1
+description: A Helm chart for Kubernetes
+name: platform-wrapper
+version: 0.1.0
+
+dependencies:
+  - name: sb-swip-platform
+    version: 12.1.2
+    repository: https://github.com/Swibi/sb-helm-repo

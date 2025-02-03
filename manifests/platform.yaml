@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: swip-platform
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    namespace: local
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://github.com/elski569/swip-deployment/
+    path: helm/platform-wrapper
+    targetRevision: HEAD
+    helm:
+      skipCrds: false
+      valueFiles:
+            - 'values.yaml' 
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true

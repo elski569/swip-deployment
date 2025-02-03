@@ -1,0 +1,108 @@
+sb-swip-platform:
+  sb-admin-service:
+    cloudnativepg:
+      enabled: true
+      host: swim-restore-rw.cloud-pg
+    config:
+      swimbird:
+        authorization:
+          keycloak:
+            baseUri: http://keycloak.keycloak:8090
+            baseUris: http://keycloak.keycloak:8090
+    enabled: false
+    image:
+      tag: latest
+      imagePullPolicy: Always
+    tracing:
+      enabled: false
+  sb-private-assets:
+    image:
+      tag: latest
+      imagePullPolicy: Always
+    enabled: false
+  sb-private-funds: 
+    enabled: false
+    image:
+      tag: latest
+      imagePullPolicy: Always
+  sb-standalone:
+    enabled: false
+    config:
+      sb_services:
+        authorization:
+          keycloak:
+            hostName: keycloak.keycloak
+            adminPort: 8090
+            clientPort: 8090
+        marketdata:
+          elastic:
+            host: elasticsearch-master.shared
+        featureFlags:
+          useStrimziKafka: true
+        layout:
+            profile_path: value-bridge
+    cloudnativepg:
+      enabled: true
+      host: swim-restore-rw.cloud-pg
+    image:
+      tag: latest
+      imagePullPolicy: Always
+    tracing:
+      enabled: false
+    cache:
+      redis:
+        # standalone-cache-test in GCP
+        host: 10.78.254.203
+  sb-swip-app :
+    enabled: false
+    image:
+      tag: latest
+      imagePullPolicy: Always
+    config:
+      USE_LEGACY_ACCOUNT_LIST: "false"
+      # Can be removed when default value is set in chart
+      # Falsy value is needed to show both market value and performance graph
+      RESTRICT_DASHBOARD_CHART_VIEW: "false"
+  sb-accounting:
+    enabled: false
+    config:
+      swimbird:
+        authorization:
+          keycloak:
+            baseUri: http://keycloak.keycloak:8090
+    cloudnativepg:
+      enabled: true
+      host: swim-restore-rw.cloud-pg
+    image:
+      tag: latest
+      imagePullPolicy: Always
+    tracing:
+      enabled: false
+  sb-document:
+    enabled: false
+    image:
+      tag: latest
+    cloudnativepg:
+      enabled: true
+      host: swim-restore-rw.cloud-pg
+    storage:
+      bucketname: swimbird-test-document-service-assets
+    tracing:
+      enabled: false
+  sb-clickhouse-interface:
+    enabled: false
+    image:
+      tag: latest
+    database:
+      host: bbe5ik2wva.europe-west4.gcp.clickhouse.cloud
+  sb-clickhouse-cdc:
+    enabled: false
+    image:
+      tag: latest
+    cloudnativepg:
+      enabled: true
+      host: swim-restore-rw.cloud-pg
+    clickhouse:
+      host: bbe5ik2wva.europe-west4.gcp.clickhouse.cloud
+  sb-config-provider:
+    enabled: true

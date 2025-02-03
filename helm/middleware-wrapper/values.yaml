@@ -1,0 +1,62 @@
+sb-swip-middleware:
+  postgresql:
+    enabled: true
+  postgresql-ha:
+    enabled: false
+  mongodb:
+    persistence:
+      storageClass: local-path
+      size: 1Gi
+
+  cp-helm-charts:
+    enabled: true
+    cp-kafka:
+      persistence:
+        storageClass: local-path
+        size: 1Gi
+      brokers: 1
+    cp-zookeeper:
+      persistence:
+        dataDirSize: 1Gi
+        dataDirStorageClass: local-path
+        dataLogDirSize: 1Gi
+      servers: 1
+
+  cloudnativepg:
+    enabled: false
+    host: swim-rw.middleware
+    user: postgres
+    port: 5432
+
+  cluster:
+    fullnameOverride: "swim"
+    type: postgresql
+    version:
+      postgresql: "17"
+
+    cluster:
+      instances: 1
+      imageName: ghcr.io/cloudnative-pg/postgresql:17.0-17
+      imagePullPolicy: IfNotPresent
+
+      primaryUpdateStrategy: unsupervised
+
+      enableSuperuserAccess: true
+      superuserSecret: cloudnativepg
+      
+      storage:
+        size: 2Gi
+        storageClass: local-path
+
+      monitoring:
+        enabled: false
+
+      postgresql:
+        parameters:
+          password_encryption: md5
+        pg_hba:
+          - host all all all md5
+          - host all all 0.0.0.0/0 md5
+
+    backups:
+      enabled: false

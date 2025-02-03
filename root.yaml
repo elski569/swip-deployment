@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: swip-root
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/elski569/swip-deployment
+    path: manifests
+    targetRevision: HEAD
+    directory:
+      recurse: false
+    imagePullSecrets:
+      - name: regcred
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

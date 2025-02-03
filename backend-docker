@@ -1,0 +1,13 @@
+FROM your-base-image
+
+# Set up git
+RUN apt-get update && apt-get install -y git
+
+# Clone your repo with submodules
+WORKDIR /app
+RUN git clone --recursive https://github.com/your/repo.git .
+RUN git submodule update --init --recursive
+RUN git submodule foreach git checkout master
+RUN git submodule foreach git pull origin master
+
+# Rest of your Dockerfile...
