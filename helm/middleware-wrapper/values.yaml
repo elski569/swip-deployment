@@ -3,6 +3,8 @@ sb-swip-middleware:
     enabled: false
   postgresql-ha:
     enabled: false
+  dbInit:
+    enabled: false 
   mongodb:
     auth:
       rootPassword: "password"
