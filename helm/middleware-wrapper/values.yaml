@@ -8,16 +8,12 @@ sb-swip-middleware:
       enabled: true
       size: 1Gi #change size??
       storageClass: local-path
-    dbInitJob:
-      enabled: false
 
   postgresql-ha:
     enabled: false
 
   mongodb:
     enabled: true
-    auth:
-      rootPassword: "password"
     service:
       type: LoadBalancer
     persistence:
