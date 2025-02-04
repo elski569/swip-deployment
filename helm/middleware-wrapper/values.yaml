@@ -4,7 +4,10 @@ sb-swip-middleware:
     enabled: true
     service:
       type: LoadBalancer
+    initdbScripts:
+      enabled: false
     persistence:
+      enabled: true
       size: 1Gi #change size??
       storageClass: local-path
 
@@ -29,7 +32,7 @@ sb-swip-middleware:
     enabled: false
 
   cloudnativepg:
-    enabled: true
+    enabled: false
 
   # cluster:
   #   fullnameOverride: "swim"
