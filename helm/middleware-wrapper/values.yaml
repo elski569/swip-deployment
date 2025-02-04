@@ -8,6 +8,8 @@ sb-swip-middleware:
       enabled: true
       size: 1Gi #change size??
       storageClass: local-path
+    initdbScripts:
+      enabled: false
 
   postgresql-ha:
     enabled: false
