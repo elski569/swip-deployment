@@ -1,12 +1,18 @@
 #INspired by sb-local-development/local/sb-swip-middleware.yaml
 sb-swip-middleware:  
+  # CloudnativePG configuration needed for db-init-job
   cloudnativepg:
-    enabled: true  # Enable to use with db-init-job
-    host: postgresql  # Use the PostgreSQL service name
+    enabled: true
+    host: local-postgresql  # This should match your PostgreSQL service name
     port: 5432
   
+  # PostgreSQL configuration
   postgresql:
     enabled: true
+    fullnameOverride: local-postgresql  # This ensures the service name matches what we specified above
+    auth:
+      postgresPassword: secretpassword
+      username: postgres
     service:
       type: LoadBalancer
     persistence:
