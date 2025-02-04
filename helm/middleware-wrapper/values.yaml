@@ -10,10 +10,6 @@ sb-swip-middleware:
   
   postgresql:
     enabled: true
-    fullnameOverride: local-postgresql  # This ensures the service name matches what we specified above
-    auth:
-      postgresPassword: secretpassword
-      username: postgres
     service:
       type: LoadBalancer
     persistence:
