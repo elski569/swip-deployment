@@ -5,43 +5,31 @@ sb-swip-middleware:
     service:
       type: LoadBalancer
     persistence:
-      size: 1Gi
+      size: 1Gi #change size??
       storageClass: local-path
+
   postgresql-ha:
     enabled: false
+
   mongodb:
-    #auth:
-      #rootPassword: "password"
+    enabled: true
+    auth:
+      rootPassword: "password"
     service:
       type: LoadBalancer
     persistence:
+      enabled: true
       storageClass: local-path
-      size: 1Gi
+      size: 1Gi #testa större size?
       
   sb-kafka:
     enabled: true
 
   cp-helm-charts:
     enabled: false
-    cp-kafka:
-      persistence:
-        storageClass: local-path
-        size: 1Gi
-      brokers: 1
-      service:
-        type: LoadBalancer
-    cp-zookeeper:
-      persistence:
-        dataDirSize: 1Gi
-        dataDirStorageClass: local-path
-        dataLogDirSize: 1Gi
-      servers: 1
 
   cloudnativepg:
-    enabled: false
-    host: swim-rw.middleware
-    user: postgres
-    port: 5432
+    enabled: true
 
   # cluster:
   #   fullnameOverride: "swim"

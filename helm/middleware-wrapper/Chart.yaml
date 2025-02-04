@@ -9,3 +9,4 @@ dependencies:
   - name: sb-swip-middleware
     version: 2.6.2
     repository: https://swibi.github.io/sb-helm-repo/
+ 
