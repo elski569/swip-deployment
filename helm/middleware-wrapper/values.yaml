@@ -1,12 +1,12 @@
 #INspired by sb-local-development/local/sb-swip-middleware.yaml
 sb-swip-middleware:
-  global:
-    postgresql:
-      host: local-postgresql  # This will override the default host in templates  
   cloudnativepg:
     enabled: true
-    host: local-postgresql  # This should match your PostgreSQL service name
+    host: swim-rw.cloud-pg
+    user: postgres
     port: 5432
+    service:
+      type: LoadBalancer
   
   postgresql:
     enabled: true
@@ -20,11 +20,7 @@ sb-swip-middleware:
       enabled: true
       size: 10Gi #change size??
       storageClass: local-path
-  # Create the secret that the job expects
-  secrets:
-    cloudnativepg:
-      password: secretpassword
-
+ 
   postgresql-ha:
     enabled: false
 
@@ -43,8 +39,6 @@ sb-swip-middleware:
   cp-helm-charts:
     enabled: false
 
-  cloudnativepg:
-    enabled: false
 
   # cluster:
   #   fullnameOverride: "swim"
