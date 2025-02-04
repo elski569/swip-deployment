@@ -4,8 +4,6 @@ sb-swip-middleware:
     enabled: true
     service:
       type: LoadBalancer
-    initdbScripts:
-      enabled: false
     persistence:
       enabled: true
       size: 1Gi #change size??
