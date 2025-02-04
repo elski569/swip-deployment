@@ -1,68 +1,125 @@
+#INspired by sb-local-development/local/sb-swip-platform.yaml
 sb-swip-platform:
+  global:
+    ingress:
+      enabled: false
   sb-admin-service:
+    enabled: true
     cloudnativepg:
-      enabled: true
+      enabled: false # funkar ej
       host: swim-restore-rw.cloud-pg
     config:
       swimbird:
         authorization:
           keycloak:
-            baseUri: http://keycloak.keycloak:8090
+            baseUri: http://keycloak.keycloak:8090 #ns.service:port
             baseUris: http://keycloak.keycloak:8090
-    enabled: false
     image:
       tag: latest
       imagePullPolicy: Always
-    tracing:
-      enabled: false
+    #tracing:
+    #  enabled: false
   sb-private-assets:
     image:
       tag: latest
       imagePullPolicy: Always
-    enabled: false
+    enabled: false #bra för test
   sb-private-funds: 
     enabled: false
     image:
       tag: latest
       imagePullPolicy: Always
   sb-standalone:
-    enabled: false
+    enabled: true
+    resources:
+      default: small
+    ingress:
+      enabled: false
     config:
+      # sb_services:
+      #   authorization:
+      #     keycloak:
+      #       hostName: keycloak.keycloak
+      #       adminPort: 8090
+      #       clientPort: 8090
+      #   marketdata:
+      #     elastic:
+      #       host: elasticsearch-master.shared
+      #   featureFlags:
+      #     useStrimziKafka: true
+      #   layout:
+      #       profile_path: value-bridge
       sb_services:
         authorization:
+          oauth2:
+            realm: local
+            clientSecret: u4EHBMgAum9dU1a9ohSi6DWsMdimBz3j
           keycloak:
-            hostName: keycloak.keycloak
-            adminPort: 8090
-            clientPort: 8090
-        marketdata:
-          elastic:
-            host: elasticsearch-master.shared
-        featureFlags:
-          useStrimziKafka: true
+            hostName: localhost
+            port: 8090
+          swip_app:
+            host: localhost
+            port: 8090
         layout:
-            profile_path: value-bridge
+          profile_path: value-bridge
+        liveness:
+          enabled: false
+          failureThreshold: 100
+          periodSeconds: 300
+          initialDelaySeconds: 300
+        readiness:
+          enabled: false
+          failureThreshold: 100
+          periodSeconds: 300
+          initialDelaySeconds: 300
     cloudnativepg:
-      enabled: true
+      enabled: false
       host: swim-restore-rw.cloud-pg
     image:
       tag: latest
       imagePullPolicy: Always
+    kafka:
+      releaseName: local-mw
+      cloud:
+        enabled: false
+    mongodb:
+      releaseName: local-mw
     tracing:
       enabled: false
     cache:
       redis:
         # standalone-cache-test in GCP
         host: 10.78.254.203
+    monitoring:
+      enabled: false
+    service:
+      port: 8093
+      type: LoadBalancer
+    probes:
+      livenessProbe:
+        enabled: false
+      readinessProbe:
+        enabled: false
+
   sb-swip-app :
-    enabled: false
+    enabled: true
     image:
       tag: latest
       imagePullPolicy: Always
+    ingress:
+      enabled: false
+    service:
+      port: 8090
+      type: LoadBalancer
     config:
+      backendPort: 8093
+      peFundsBackendPort: 8091
+      privateAssetsBackendPort: 8092
+      USE_GLOBAL_ACCOUNT_SELECTOR_REPLACE: true
+      globalResourceBasePath:
       USE_LEGACY_ACCOUNT_LIST: "false"
-      # Can be removed when default value is set in chart
-      # Falsy value is needed to show both market value and performance graph
       RESTRICT_DASHBOARD_CHART_VIEW: "false"
+    
   sb-accounting:
     enabled: false
     config:
@@ -71,13 +128,14 @@ sb-swip-platform:
           keycloak:
             baseUri: http://keycloak.keycloak:8090
     cloudnativepg:
-      enabled: true
+      enabled: false
       host: swim-restore-rw.cloud-pg
     image:
       tag: latest
       imagePullPolicy: Always
     tracing:
       enabled: false
+  
   sb-document:
     enabled: false
     image:
@@ -89,12 +147,14 @@ sb-swip-platform:
       bucketname: swimbird-test-document-service-assets
     tracing:
       enabled: false
+  
   sb-clickhouse-interface:
     enabled: false
     image:
       tag: latest
     database:
       host: bbe5ik2wva.europe-west4.gcp.clickhouse.cloud
+  
   sb-clickhouse-cdc:
     enabled: false
     image:
@@ -104,5 +164,6 @@ sb-swip-platform:
       host: swim-restore-rw.cloud-pg
     clickhouse:
       host: bbe5ik2wva.europe-west4.gcp.clickhouse.cloud
+  
   sb-config-provider:
-    enabled: true
+    enabled: false
