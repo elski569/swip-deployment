@@ -1,62 +1,24 @@
 #INspired by sb-local-development/local/sb-swip-middleware.yaml
 sb-swip-middleware:  
-  # postgresql:
-  #   enabled: true
-  #   service:
-  #     type: LoadBalancer
-  #   persistence:
-  #     enabled: true
-  #     size: 1Gi #change size??
-  #     storageClass: local-path
+  cloudnativepg:
+    enabled: true  # Enable to use with db-init-job
+    host: postgresql  # Use the PostgreSQL service name
+    port: 5432
+  
   postgresql:
     enabled: true
-    postgresqlPassword: secretpassword
-    initdbUser: postgres
-    initdbPassword: secretpassword
-    initdbScripts:
-      1-init-db.sql: |
-        create database sb_authorization;
-        create database sb_transactions;
-        create database sb_instruments;
-        create database sb_parties;
-        create database sb_positions;
-        create database sb_accounting;
-      2-init-schemas.sql: |
-        \c sb_authorization;
-        CREATE SCHEMA IF NOT EXISTS sb_authorization;
-        \c sb_transactions;
-        CREATE SCHEMA IF NOT EXISTS transactions;
-        \c sb_instruments;
-        CREATE SCHEMA IF NOT EXISTS instruments;
-        \c sb_parties;
-        CREATE SCHEMA IF NOT EXISTS parties;
-        \c sb_positions;
-        CREATE SCHEMA IF NOT EXISTS positions;
-        \c sb_accounting;
-        CREATE SCHEMA IF NOT EXISTS sb_accounting;
-    persistence:
-      size: 10Gi
-      # Set to hostpath for local docker desktop development
-      storageClass: local-path
     service:
       type: LoadBalancer
-    postgresqlExtendedConf: 
-      maxConnections: 300
-      sharedBuffers: 80MB
+    persistence:
+      enabled: true
+      size: 1Gi #change size??
+      storageClass: local-path
 
   postgresql-ha:
     enabled: false
 
   mongodb:
     enabled: true
-    replicaSet: #from old
-      enabled: true
-      pdb:
-        enabled: false
-    mongodbRootPassword: password
-    volumePermissions:
-      enabled: true
-    #end from old
     service:
       type: LoadBalancer
     persistence:
