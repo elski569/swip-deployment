@@ -1,5 +1,7 @@
 #INspired by sb-local-development/local/sb-swip-middleware.yaml
 sb-swip-middleware:
+  dbInit:
+    enabled: false 
   cloudnativepg:
     enabled: true
     host: swim-rw.cloud-pg
