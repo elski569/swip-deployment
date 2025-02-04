@@ -1,12 +1,13 @@
 #INspired by sb-local-development/local/sb-swip-middleware.yaml
-sb-swip-middleware:  
-  # CloudnativePG configuration needed for db-init-job
+sb-swip-middleware:
+  global:
+    postgresql:
+      host: local-postgresql  # This will override the default host in templates  
   cloudnativepg:
     enabled: true
     host: local-postgresql  # This should match your PostgreSQL service name
     port: 5432
   
-  # PostgreSQL configuration
   postgresql:
     enabled: true
     fullnameOverride: local-postgresql  # This ensures the service name matches what we specified above
@@ -17,8 +18,12 @@ sb-swip-middleware:
       type: LoadBalancer
     persistence:
       enabled: true
-      size: 1Gi #change size??
+      size: 10Gi #change size??
       storageClass: local-path
+  # Create the secret that the job expects
+  secrets:
+    cloudnativepg:
+      password: secretpassword
 
   postgresql-ha:
     enabled: false
@@ -30,7 +35,7 @@ sb-swip-middleware:
     persistence:
       enabled: true
       storageClass: local-path
-      size: 1Gi #testa större size?
+      size: 8Gi #testa större size?
       
   sb-kafka:
     enabled: true
