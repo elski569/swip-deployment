@@ -19,7 +19,7 @@ sb-swip-middleware:
       size: 1Gi
       
   sb-kafka:
-  enabled: true
+    enabled: true
 
   cp-helm-charts:
     enabled: false
