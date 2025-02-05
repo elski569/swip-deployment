@@ -44,7 +44,10 @@ sb-swip-platform:
   sb-standalone:
     enabled: true
     service:
-      type: LoadBalancer  
+      type: LoadBalancer
+      port: 8093  # External port
+      targetPort: 8080  # Container port
+    
     image:
       tag: latest
       imagePullPolicy: Always
@@ -78,6 +81,10 @@ sb-swip-platform:
           failureThreshold: 100
           periodSeconds: 300
           initialDelaySeconds: 300
+      # Add server port configuration
+      server:
+        port: 8080
+        contextPath: /sb-backend
 
     cloudnativepg:
       enabled: false
@@ -94,20 +101,51 @@ sb-swip-platform:
       releaseName: local-mw
     tracing:
       enabled: false
-    cache:
-      redis:
-        # standalone-cache-test in GCP
-        host: 10.78.254.203
+    # cache:
+    #   redis:
+    #     # standalone-cache-test in GCP
+    #     host: 10.78.254.203
     monitoring:
       enabled: false
     service:
       port: 8093
       type: LoadBalancer
+    containerPorts:
+      - name: http
+        containerPort: 8080
+        protocol: TCP
+      - name: metrics
+        containerPort: 8087
+        protocol: TCP
     probes:
       livenessProbe:
-        enabled: false
+        enabled: true
+        httpGet:
+          path: /sb-backend/internal/health
+          port: 8080
+        initialDelaySeconds: 180  # Give more time to start
+        timeoutSeconds: 30
+        periodSeconds: 15
+        failureThreshold: 3
       readinessProbe:
-        enabled: false
+        enabled: true
+        httpGet:
+          path: /sb-backend/internal/alive/ping
+          port: 8080
+        initialDelaySeconds: 120  # Give more time to start
+        timeoutSeconds: 1
+        periodSeconds: 10
+        failureThreshold: 30
+
+    # env:
+    #   - name: SERVER_PORT
+    #     value: "8080"
+    #   - name: SPRING_CLOUD_STREAM_KAFKA_BINDER_AUTOCREATETOPICS
+    #     value: "true"
+    #   - name: SWIMBIRD_SERVER_PRIMARY
+    #     value: "true"
+    #   - name: SWIMBIRD_RELEASE
+    #     value: "swip-platform"
 
   sb-swip-app :
     enabled: true
