@@ -14,9 +14,9 @@ sb-swip-platform:
           keycloak:
             baseUri: http://keycloak.keycloak:8090 #ns.service:port
             baseUris: http://keycloak.keycloak:8090
-    #image:
-    #  tag: latest
-    #  imagePullPolicy: Always
+    image:
+      tag: latest
+      imagePullPolicy: Always
     #tracing:
     #  enabled: false
     postgres:
@@ -195,7 +195,4 @@ sb-swip-platform:
   
   sb-config-provider:
     enabled: false
-
-  service:
-    type: LoadBalancer
 
