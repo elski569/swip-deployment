@@ -1,7 +1,23 @@
 #INspired by sb-local-development/local/sb-swip-middleware.yaml
 sb-swip-middleware:
   #dbInit:
-  #  enabled: false 
+  #  enabled: false
+  # Create secrets for MongoDB
+  secrets:
+    mongodb:
+      create: true
+      data:
+        username: ${MONGODB_USERNAME}
+        password: ${MONGODB_PASSWORD}
+    
+    # PostgreSQL credentials
+    postgresql:
+      create: true
+      data:
+        postgres-password: ${CLOUDNATIVE_PG_PASSWORD}
+        password: ${CLOUDNATIVE_PG_PASSWORD}
+        username: ${CLOUDNATIVE_PG_USERNAME} 
+
   cloudnativepg:
     enabled: false
     host: swim-rw.cloud-pg
@@ -12,6 +28,11 @@ sb-swip-middleware:
   
   postgresql:
     enabled: true
+    auth:
+      existingSecret: swip-middleware-postgresql
+      secretKeys:
+        adminPasswordKey: postgres-password
+        userPasswordKey: password
     service:
       type: LoadBalancer
     persistence:
@@ -24,6 +45,10 @@ sb-swip-middleware:
 
   mongodb:
     enabled: true
+    auth:
+      existingSecret: mongodb-credentials
+      userKey: username
+      passwordKey: password
     service:
       type: LoadBalancer
     persistence:
