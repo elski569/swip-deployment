@@ -3,6 +3,13 @@ sb-swip-platform:
   global:
     ingress:
       enabled: false
+    postgresql:
+      auth:
+        existingSecret: swip-middleware-postgresql  # Use the existing PostgreSQL secret
+        secretKeys:
+          adminPasswordKey: postgresql-password
+          userPasswordKey: postgresql-password
+          replicationPasswordKey: postgresql-password
   
   sb-admin-service:
     enabled: true
@@ -21,8 +28,8 @@ sb-swip-platform:
       enabled: false
     postgresql:
       auth:
-        existingSecret: swip-middleware-postgresql  # Changed to match the actual PostgreSQL secret name
-        passwordKey: postgresql-password 
+        existingSecret: swip-middleware-postgresql  # Use the existing PostgreSQL secret
+        passwordKey: postgresql-password  # Match the key in the PostgreSQL secret
 
   sb-private-assets:
     enabled: false #bra för test
