@@ -155,7 +155,17 @@ sb-swip-platform:
       globalResourceBasePath:
       USE_LEGACY_ACCOUNT_LIST: "false"
       RESTRICT_DASHBOARD_CHART_VIEW: "false"
-    
+    env:
+      - name: DOCUMENTS_BASE_URL_REPLACE
+        value: "http://localhost:8080/document-service"  # Fixed: removed double backslash
+      - name: GATEWAY_BASE_URL_REPLACE
+        value: "http://localhost:8093/sb-backend"
+      - name: ACCOUNTING_BASE_URL_REPLACE
+        value: "http://localhost:8080/accounting"
+      - name: ADMIN_BASE_URL_REPLACE
+        value: "http://localhost:8080/admin"
+      - name: CATEGORIES_BASE_URL_REPLACE
+        value: "/global/category-service"
   sb-accounting:
     enabled: false
     # config:
