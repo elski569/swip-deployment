@@ -24,8 +24,8 @@ sb-swip-platform:
       port: 5432
       partiesDatabase: sb_parties
       authorizationDatabase: sb_authorization
-      # This will make it use the correct secret name
-      fullnameOverride: swip-middleware-postgresql
+    service:
+      type: LoadBalancer
 
   sb-private-assets:
     enabled: false #bra för test
@@ -87,7 +87,8 @@ sb-swip-platform:
     image:
       tag: latest
       imagePullPolicy: Always
-    kafka:
+    sb-kafka:
+      enabled: true
       releaseName: local-mw
       cloud:
         enabled: false
@@ -176,3 +177,7 @@ sb-swip-platform:
   
   sb-config-provider:
     enabled: false
+
+  service:
+    type: LoadBalancer
+
