@@ -1,12 +1,12 @@
 #INspired by sb-local-development/local/sb-swip-middleware.yaml
 sb-swip-middleware:
-  dbInit:
-    enabled: false 
+  #dbInit:
+  #  enabled: false 
   cloudnativepg:
-    enabled: true
+    enabled: false
     host: swim-rw.cloud-pg
     user: postgres
-    port: 5432
+    port: #5432
     service:
       type: LoadBalancer
   
@@ -16,8 +16,10 @@ sb-swip-middleware:
       type: LoadBalancer
     persistence:
       enabled: true
-      size: 10Gi #change size??
+      size: 1Gi #change size?? orginal 10Gi
       storageClass: local-path
+    initdbScripts:
+      enabled: false
  
   postgresql-ha:
     enabled: false
@@ -29,7 +31,7 @@ sb-swip-middleware:
     persistence:
       enabled: true
       storageClass: local-path
-      size: 8Gi #testa större size?
+      size: 1Gi #testa större size? orginal 8Gi
       
   sb-kafka:
     enabled: true
