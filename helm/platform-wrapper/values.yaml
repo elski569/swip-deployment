@@ -3,141 +3,139 @@ sb-swip-platform:
   global:
     ingress:
       enabled: false
-  
-  sb-admin-service:
-    enabled: true
-    cloudnativepg:
-      enabled: false 
-    config:
-      swimbird:
-        authorization:
-          keycloak:
-            baseUri: http://keycloak.keycloak:8090 #ns.service:port
-            baseUris: http://keycloak.keycloak:8090
-    image:
-      tag: latest
-      imagePullPolicy: Always
-    
-    postgres:
-      host: swip-middleware-postgresql  # Point to existing PostgreSQL service
-      port: 5432
-      partiesDatabase: sb_parties
-      authorizationDatabase: sb_authorization
-      # Remove the middleware.suffix setting
-      middleware:
-        suffix: ""  # Empty string to prevent adding -mw
-      # Remove any release name prefix
-      fullnameOverride: swip-middleware-postgresql
-      releaseName: "" 
-
-  sb-private-assets:
-    enabled: false #good for testing later on
-    image:
-      tag: latest
-      imagePullPolicy: Always
-  
-  sb-private-funds: 
-    enabled: false
-    image:
-      tag: latest
-      imagePullPolicy: Always
-
-  sb-standalone:
-    enabled: true
-    resources:
-      default: small
-    ingress:
-      enabled: false
-    config:
-      sb_services:
-        marketdata:
-            enabled: false
-            six:
-              enabled: false  
-        authorization:
-          oauth2:
-            realm: local
-            clientSecret: u4EHBMgAum9dU1a9ohSi6DWsMdimBz3j
-          keycloak:
-            hostName: localhost
-            port: 8090
-          swip_app:
-            host: localhost
-            port: 8090
-        layout:
-          profile_path: value-bridge
-        liveness:
-          enabled: false
-          failureThreshold: 100
-          periodSeconds: 300
-          initialDelaySeconds: 300
-        readiness:
-          enabled: false
-          failureThreshold: 100
-          periodSeconds: 300
-          initialDelaySeconds: 300
-
-    cloudnativepg:
-      enabled: false
-    image:
-      tag: latest
-      imagePullPolicy: Always
-    sb-kafka:
-      enabled: true
-      releaseName: local-mw
-      cloud:
-        enabled: false
-    mongodb:
-      enabled: true
-      releaseName: local-mw
-    tracing:
-      enabled: false
-    cache:
-      redis:
-        # standalone-cache-test in GCP
-        host: 10.78.254.203
     monitoring:
       enabled: false
-    service:
-      port: 8093
-      type: LoadBalancer
-    probes:
-      livenessProbe:
-        enabled: false
-      readinessProbe:
-        enabled: false
+  
+    sb-admin-service:
+      enabled: true
+      cloudnativepg:
+        enabled: false 
+      config:
+        swimbird:
+          authorization:
+            keycloak:
+              baseUri: http://keycloak.keycloak:8090 #ns.service:port
+              baseUris: http://keycloak.keycloak:8090
+      image:
+        tag: latest
+        imagePullPolicy: Always
+      postgres:
+        host: swip-middleware-postgresql  # Point to existing PostgreSQL service
+        port: 5432
+        # Remove the middleware.suffix setting
+        middleware:
+          suffix: ""  # Empty string to prevent adding -mw
+        # Remove any release name prefix
+        fullnameOverride: swip-middleware-postgresql
+        releaseName: "" 
 
-  sb-swip-app :
-    enabled: true
-    image:
-      tag: latest
-      imagePullPolicy: Always
-    ingress:
+    sb-private-assets:
+      enabled: false #good for testing later on
+      image:
+        tag: latest
+        imagePullPolicy: Always
+    
+    sb-private-funds: 
       enabled: false
-    service:
-      port: 8090
-      type: LoadBalancer
-    config:
-      backendPort: 8093
-      peFundsBackendPort: 8091
-      privateAssetsBackendPort: 8092
-      USE_GLOBAL_ACCOUNT_SELECTOR_REPLACE: true
-      globalResourceBasePath:
-      USE_LEGACY_ACCOUNT_LIST: "false"
-      RESTRICT_DASHBOARD_CHART_VIEW: "false"
+      image:
+        tag: latest
+        imagePullPolicy: Always
 
-  sb-accounting:
-    enabled: false
-  
-  sb-document:
-    enabled: false
+    sb-standalone:
+      enabled: true
+      service:
+        type: LoadBalancer  
+      image:
+        tag: latest
+        imagePullPolicy: Always
+      resources:
+        default: small
+      config:
+        sb_services:
+          authorization:
+            # oauth2:
+            #   realm: local
+            #   clientSecret: u4EHBMgAum9dU1a9ohSi6DWsMdimBz3j
+            keycloak:
+              hostName: localhost
+              port: 8090
+            swip_app:
+              host: localhost
+              port: 8090
+          layout:
+            profile_path: value-bridge
+          liveness:
+            enabled: false
+            failureThreshold: 100
+            periodSeconds: 300
+            initialDelaySeconds: 300
+          readiness:
+            enabled: false
+            failureThreshold: 100
+            periodSeconds: 300
+            initialDelaySeconds: 300
 
-  sb-clickhouse-interface:
-    enabled: false
+      cloudnativepg:
+        enabled: false
+      image:
+        tag: latest
+        imagePullPolicy: Always
+      sb-kafka:
+        enabled: true
+        releaseName: local-mw
+        cloud:
+          enabled: false
+      mongodb:
+        enabled: true
+        releaseName: local-mw
+      tracing:
+        enabled: false
+      cache:
+        redis:
+          # standalone-cache-test in GCP
+          host: 10.78.254.203
+      monitoring:
+        enabled: false
+      service:
+        port: 8093
+        type: LoadBalancer
+      probes:
+        livenessProbe:
+          enabled: false
+        readinessProbe:
+          enabled: false
 
-  sb-clickhouse-cdc:
-    enabled: false
-  
-  sb-config-provider:
-    enabled: false
+    sb-swip-app :
+      enabled: true
+      image:
+        tag: latest
+        imagePullPolicy: Always
+      ingress:
+        enabled: false
+      service:
+        port: 8090
+        type: LoadBalancer
+      config:
+        backendPort: 8093
+        peFundsBackendPort: 8091
+        privateAssetsBackendPort: 8092
+        USE_GLOBAL_ACCOUNT_SELECTOR_REPLACE: true
+        globalResourceBasePath:
+        USE_LEGACY_ACCOUNT_LIST: "false"
+        RESTRICT_DASHBOARD_CHART_VIEW: "false"
+
+    sb-accounting:
+      enabled: false
+    
+    sb-document:
+      enabled: false
+
+    sb-clickhouse-interface:
+      enabled: false
+
+    sb-clickhouse-cdc:
+      enabled: false
+    
+    sb-config-provider:
+      enabled: false
 
