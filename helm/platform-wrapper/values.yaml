@@ -32,15 +32,15 @@ sb-swip-platform:
       releaseName: "" 
 
     # Spring configuration
-    env:
-      - name: SPRING_DATASOURCE_PARTIES_URL
-        value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_parties"
-      - name: SPRING_DATASOURCE_AUTHORIZATION_URL
-        value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_authorization"
-      - name: SPRING_DATASOURCE_PARTIES_USERNAME
-        value: postgres
-      - name: SPRING_DATASOURCE_AUTHORIZATION_USERNAME
-        value: postgres
+    # env:
+    #   - name: SPRING_DATASOURCE_PARTIES_URL
+    #     value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_parties"
+    #   - name: SPRING_DATASOURCE_AUTHORIZATION_URL
+    #     value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_authorization"
+    #   - name: SPRING_DATASOURCE_PARTIES_USERNAME
+    #     value: postgres
+    #   - name: SPRING_DATASOURCE_AUTHORIZATION_USERNAME
+    #     value: postgres
 
   sb-private-assets:
     enabled: false #bra för test
@@ -61,19 +61,6 @@ sb-swip-platform:
     ingress:
       enabled: false
     config:
-      # sb_services:
-      #   authorization:
-      #     keycloak:
-      #       hostName: keycloak.keycloak
-      #       adminPort: 8090
-      #       clientPort: 8090
-      #   marketdata:
-      #     elastic:
-      #       host: elasticsearch-master.shared
-      #   featureFlags:
-      #     useStrimziKafka: true
-      #   layout:
-      #       profile_path: value-bridge
       sb_services:
         marketdata:
             enabled: false
@@ -101,13 +88,13 @@ sb-swip-platform:
           failureThreshold: 100
           periodSeconds: 300
           initialDelaySeconds: 300
-    extraVolumes: []
-    extraVolumeMounts: []
-    env:
-      - name: SWIMBIRD_MARKETDATA_ENABLED
-        value: "false"
-      - name: SWIMBIRD_MARKETDATA_CONFIG_SIX_ENABLED
-        value: "false"
+    # extraVolumes: []
+    # extraVolumeMounts: []
+    # env:
+    #   - name: SWIMBIRD_MARKETDATA_ENABLED
+    #     value: "false"
+    #   - name: SWIMBIRD_MARKETDATA_CONFIG_SIX_ENABLED
+    #     value: "false"
     cloudnativepg:
       enabled: false
     image:
@@ -155,17 +142,17 @@ sb-swip-platform:
       globalResourceBasePath:
       USE_LEGACY_ACCOUNT_LIST: "false"
       RESTRICT_DASHBOARD_CHART_VIEW: "false"
-    env:
-      - name: DOCUMENTS_BASE_URL_REPLACE
-        value: "http://localhost:8080/document-service"  # Fixed: removed double backslash
-      - name: GATEWAY_BASE_URL_REPLACE
-        value: "http://localhost:8093/sb-backend"
-      - name: ACCOUNTING_BASE_URL_REPLACE
-        value: "http://localhost:8080/accounting"
-      - name: ADMIN_BASE_URL_REPLACE
-        value: "http://localhost:8080/admin"
-      - name: CATEGORIES_BASE_URL_REPLACE
-        value: "/global/category-service"
+    # env:
+    #   - name: DOCUMENTS_BASE_URL_REPLACE
+    #     value: "http://localhost:8080/document-service"  # Fixed: removed double backslash
+    #   - name: GATEWAY_BASE_URL_REPLACE
+    #     value: "http://localhost:8093/sb-backend"
+    #   - name: ACCOUNTING_BASE_URL_REPLACE
+    #     value: "http://localhost:8080/accounting"
+    #   - name: ADMIN_BASE_URL_REPLACE
+    #     value: "http://localhost:8080/admin"
+    #   - name: CATEGORIES_BASE_URL_REPLACE
+    #     value: "/global/category-service"
   sb-accounting:
     enabled: false
     # config:

@@ -22,11 +22,3 @@ spec:
     automated:
       prune: true
       selfHeal: true
-  ignoreDifferences:
-  - group: batch
-    kind: Job
-    name: db-init-job
-    jsonPointers:
-    - /status
-    - /spec/selector
-    - /spec/template/spec
