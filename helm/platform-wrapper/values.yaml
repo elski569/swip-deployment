@@ -4,15 +4,6 @@ sb-swip-platform:
     ingress:
       enabled: false
   
-  secrets:
-    postgresql:
-      create: true
-      name: swip-platform-mw-postgresql
-      data:
-        postgres-password: secretpassword
-        password: secretpassword
-        replication-password: secretpassword
-  
   sb-admin-service:
     enabled: true
     cloudnativepg:
@@ -30,8 +21,8 @@ sb-swip-platform:
       enabled: false
     postgresql:
       auth:
-        existingSecret: swip-platform-mw-postgresql
-        password: secretpassword
+        existingSecret: swip-middleware-postgresql  # Changed to match the actual PostgreSQL secret name
+        passwordKey: postgresql-password 
 
   sb-private-assets:
     enabled: false #bra för test
