@@ -18,6 +18,18 @@ sb-swip-platform:
       imagePullPolicy: Always
     tracing:
       enabled: false
+    postgresql:
+      auth:
+        existingSecret: swip-platform-mw-postgresql
+        password: secretpassword
+  secrets:
+    postgresql:
+      name: swip-platform-mw-postgresql
+      data:
+        postgres-password: secretpassword
+        password: secretpassword
+        replication-password: secretpassword
+
   sb-private-assets:
     enabled: false #bra för test
     image:
