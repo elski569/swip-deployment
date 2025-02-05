@@ -56,6 +56,10 @@ sb-swip-middleware:
       
   sb-kafka:
     enabled: true
+    kafka:
+      enabled: true
+      service:
+        type: LoadBalancer  
 
   cp-helm-charts:
     enabled: false
