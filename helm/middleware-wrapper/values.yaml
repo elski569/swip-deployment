@@ -6,7 +6,7 @@ sb-swip-middleware:
     enabled: false
     host: swim-rw.cloud-pg
     user: postgres
-    port: #5432
+    port: 5432
     service:
       type: LoadBalancer
   
