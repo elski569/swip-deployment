@@ -7,7 +7,6 @@ sb-swip-platform:
     enabled: true
     cloudnativepg:
       enabled: false # funkar ej
-      host: swim-restore-rw.cloud-pg
     config:
       swimbird:
         authorization:
@@ -17,18 +16,20 @@ sb-swip-platform:
     image:
       tag: latest
       imagePullPolicy: Always
-    #tracing:
-    #  enabled: false
+    tracing:
+      enabled: false
   sb-private-assets:
+    enabled: false #bra för test
     image:
       tag: latest
       imagePullPolicy: Always
-    enabled: false #bra för test
+  
   sb-private-funds: 
     enabled: false
     image:
       tag: latest
       imagePullPolicy: Always
+
   sb-standalone:
     enabled: true
     resources:
@@ -74,7 +75,6 @@ sb-swip-platform:
           initialDelaySeconds: 300
     cloudnativepg:
       enabled: false
-      host: swim-restore-rw.cloud-pg
     image:
       tag: latest
       imagePullPolicy: Always
@@ -122,48 +122,48 @@ sb-swip-platform:
     
   sb-accounting:
     enabled: false
-    config:
-      swimbird:
-        authorization:
-          keycloak:
-            baseUri: http://keycloak.keycloak:8090
-    cloudnativepg:
-      enabled: false
-      host: swim-restore-rw.cloud-pg
-    image:
-      tag: latest
-      imagePullPolicy: Always
-    tracing:
-      enabled: false
+    # config:
+    #   swimbird:
+    #     authorization:
+    #       keycloak:
+    #         baseUri: http://keycloak.keycloak:8090
+    # cloudnativepg:
+    #   enabled: false
+    #   host: swim-restore-rw.cloud-pg
+    # image:
+    #   tag: latest
+    #   imagePullPolicy: Always
+    # tracing:
+    #   enabled: false
   
   sb-document:
     enabled: false
-    image:
-      tag: latest
-    cloudnativepg:
-      enabled: true
-      host: swim-restore-rw.cloud-pg
-    storage:
-      bucketname: swimbird-test-document-service-assets
-    tracing:
-      enabled: false
+    # image:
+    #   tag: latest
+    # cloudnativepg:
+    #   enabled: true
+    #   host: swim-restore-rw.cloud-pg
+    # storage:
+    #   bucketname: swimbird-test-document-service-assets
+    # tracing:
+    #   enabled: false
   
   sb-clickhouse-interface:
     enabled: false
-    image:
-      tag: latest
-    database:
-      host: bbe5ik2wva.europe-west4.gcp.clickhouse.cloud
+    # image:
+    #   tag: latest
+    # database:
+    #   host: bbe5ik2wva.europe-west4.gcp.clickhouse.cloud
   
   sb-clickhouse-cdc:
     enabled: false
-    image:
-      tag: latest
-    cloudnativepg:
-      enabled: true
-      host: swim-restore-rw.cloud-pg
-    clickhouse:
-      host: bbe5ik2wva.europe-west4.gcp.clickhouse.cloud
+    # image:
+    #   tag: latest
+    # cloudnativepg:
+    #   enabled: true
+    #   host: swim-restore-rw.cloud-pg
+    # clickhouse:
+    #   host: bbe5ik2wva.europe-west4.gcp.clickhouse.cloud
   
   sb-config-provider:
     enabled: false
