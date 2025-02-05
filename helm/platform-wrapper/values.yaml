@@ -24,6 +24,24 @@ sb-swip-platform:
       port: 5432
       partiesDatabase: sb_parties
       authorizationDatabase: sb_authorization
+      # Remove the middleware.suffix setting
+      middleware:
+        suffix: ""  # Empty string to prevent adding -mw
+      # Remove any release name prefix
+      fullnameOverride: swip-middleware-postgresql
+      releaseName: "" 
+
+    # Spring configuration
+    env:
+      - name: SPRING_DATASOURCE_PARTIES_URL
+        value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_parties"
+      - name: SPRING_DATASOURCE_AUTHORIZATION_URL
+        value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_authorization"
+      - name: SPRING_DATASOURCE_PARTIES_USERNAME
+        value: postgres
+      - name: SPRING_DATASOURCE_AUTHORIZATION_USERNAME
+        value: postgres
+
     service:
       type: LoadBalancer
 
