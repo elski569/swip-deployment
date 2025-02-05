@@ -42,9 +42,6 @@ sb-swip-platform:
       - name: SPRING_DATASOURCE_AUTHORIZATION_USERNAME
         value: postgres
 
-    service:
-      type: LoadBalancer
-
   sb-private-assets:
     enabled: false #bra för test
     image:
@@ -79,6 +76,9 @@ sb-swip-platform:
       #       profile_path: value-bridge
       sb_services:
         authorization:
+          marketdata:
+            six:
+              enabled: false
           oauth2:
             realm: local
             clientSecret: u4EHBMgAum9dU1a9ohSi6DWsMdimBz3j
