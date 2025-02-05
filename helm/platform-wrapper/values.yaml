@@ -77,6 +77,8 @@ sb-swip-platform:
       sb_services:
         marketdata:
             enabled: false
+            six:
+              enabled: false  
         authorization:
           oauth2:
             realm: local
@@ -99,6 +101,13 @@ sb-swip-platform:
           failureThreshold: 100
           periodSeconds: 300
           initialDelaySeconds: 300
+    extraVolumes: []
+    extraVolumeMounts: []
+    env:
+      - name: SWIMBIRD_MARKETDATA_ENABLED
+        value: "false"
+      - name: SWIMBIRD_MARKETDATA_CONFIG_SIX_ENABLED
+        value: "false"
     cloudnativepg:
       enabled: false
     image:
