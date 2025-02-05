@@ -52,6 +52,10 @@ sb-swip-platform:
       default: small
     config:
       sb_services:
+        marketdata:
+          enabled: false  # Disable all marketdata
+          six:
+            enabled: false 
         authorization:
           # oauth2:
           #   realm: local
