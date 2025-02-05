@@ -107,7 +107,7 @@ sb-swip-platform:
         enabled: false
     env:
       - name: SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS
-        value: "swip-middleware-kafka:9092"
+        value: "swip-middleware-sb-kafka-svc"  # Updated service name
       - name: SPRING_CLOUD_STREAM_KAFKA_BINDER_AUTOCREATETOPICS
         value: "true"
       - name: SWIMBIRD_SERVER_PRIMARY

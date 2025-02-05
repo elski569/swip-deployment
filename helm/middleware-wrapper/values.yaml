@@ -64,4 +64,7 @@ sb-swip-middleware:
 
   cp-helm-charts:
     enabled: false
+  
+  sb-schema-registry:
+    enabled: false  
 
