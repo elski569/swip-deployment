@@ -7,7 +7,7 @@ sb-swip-platform:
   sb-admin-service:
     enabled: true
     cloudnativepg:
-      enabled: false # funkar ej
+      enabled: false 
     config:
       swimbird:
         authorization:
@@ -17,8 +17,7 @@ sb-swip-platform:
     image:
       tag: latest
       imagePullPolicy: Always
-    #tracing:
-    #  enabled: false
+    
     postgres:
       host: swip-middleware-postgresql  # Point to existing PostgreSQL service
       port: 5432
@@ -31,19 +30,8 @@ sb-swip-platform:
       fullnameOverride: swip-middleware-postgresql
       releaseName: "" 
 
-    # Spring configuration
-    # env:
-    #   - name: SPRING_DATASOURCE_PARTIES_URL
-    #     value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_parties"
-    #   - name: SPRING_DATASOURCE_AUTHORIZATION_URL
-    #     value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_authorization"
-    #   - name: SPRING_DATASOURCE_PARTIES_USERNAME
-    #     value: postgres
-    #   - name: SPRING_DATASOURCE_AUTHORIZATION_USERNAME
-    #     value: postgres
-
   sb-private-assets:
-    enabled: false #bra för test
+    enabled: false #good for testing later on
     image:
       tag: latest
       imagePullPolicy: Always
@@ -88,13 +76,7 @@ sb-swip-platform:
           failureThreshold: 100
           periodSeconds: 300
           initialDelaySeconds: 300
-    # extraVolumes: []
-    # extraVolumeMounts: []
-    # env:
-    #   - name: SWIMBIRD_MARKETDATA_ENABLED
-    #     value: "false"
-    #   - name: SWIMBIRD_MARKETDATA_CONFIG_SIX_ENABLED
-    #     value: "false"
+
     cloudnativepg:
       enabled: false
     image:
@@ -106,6 +88,7 @@ sb-swip-platform:
       cloud:
         enabled: false
     mongodb:
+      enabled: true
       releaseName: local-mw
     tracing:
       enabled: false
@@ -142,61 +125,18 @@ sb-swip-platform:
       globalResourceBasePath:
       USE_LEGACY_ACCOUNT_LIST: "false"
       RESTRICT_DASHBOARD_CHART_VIEW: "false"
-    # env:
-    #   - name: DOCUMENTS_BASE_URL_REPLACE
-    #     value: "http://localhost:8080/document-service"  # Fixed: removed double backslash
-    #   - name: GATEWAY_BASE_URL_REPLACE
-    #     value: "http://localhost:8093/sb-backend"
-    #   - name: ACCOUNTING_BASE_URL_REPLACE
-    #     value: "http://localhost:8080/accounting"
-    #   - name: ADMIN_BASE_URL_REPLACE
-    #     value: "http://localhost:8080/admin"
-    #   - name: CATEGORIES_BASE_URL_REPLACE
-    #     value: "/global/category-service"
+
   sb-accounting:
     enabled: false
-    # config:
-    #   swimbird:
-    #     authorization:
-    #       keycloak:
-    #         baseUri: http://keycloak.keycloak:8090
-    # cloudnativepg:
-    #   enabled: false
-    #   host: swim-restore-rw.cloud-pg
-    # image:
-    #   tag: latest
-    #   imagePullPolicy: Always
-    # tracing:
-    #   enabled: false
   
   sb-document:
     enabled: false
-    # image:
-    #   tag: latest
-    # cloudnativepg:
-    #   enabled: true
-    #   host: swim-restore-rw.cloud-pg
-    # storage:
-    #   bucketname: swimbird-test-document-service-assets
-    # tracing:
-    #   enabled: false
-  
+
   sb-clickhouse-interface:
     enabled: false
-    # image:
-    #   tag: latest
-    # database:
-    #   host: bbe5ik2wva.europe-west4.gcp.clickhouse.cloud
-  
+
   sb-clickhouse-cdc:
     enabled: false
-    # image:
-    #   tag: latest
-    # cloudnativepg:
-    #   enabled: true
-    #   host: swim-restore-rw.cloud-pg
-    # clickhouse:
-    #   host: bbe5ik2wva.europe-west4.gcp.clickhouse.cloud
   
   sb-config-provider:
     enabled: false

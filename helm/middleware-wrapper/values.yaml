@@ -1,22 +1,20 @@
 #INspired by sb-local-development/local/sb-swip-middleware.yaml
 sb-swip-middleware:
-  #dbInit:
-  #  enabled: false
   # Create secrets for MongoDB
   secrets:
     mongodb:
       create: true
       data:
-        username: ${MONGODB_USERNAME}
-        password: ${MONGODB_PASSWORD}
+        username: root
+        password: password
     
     # PostgreSQL credentials
     postgresql:
       create: true
       data:
-        postgres-password: ${CLOUDNATIVE_PG_PASSWORD}
-        password: ${CLOUDNATIVE_PG_PASSWORD}
-        username: ${CLOUDNATIVE_PG_USERNAME} 
+        postgres-password: postgres
+        password: postgres
+        username: postgres
 
   cloudnativepg:
     enabled: false
@@ -62,36 +60,3 @@ sb-swip-middleware:
   cp-helm-charts:
     enabled: false
 
-
-  # cluster:
-  #   fullnameOverride: "swim"
-  #   type: postgresql
-  #   version:
-  #     postgresql: "17"
-
-  #   cluster:
-  #     instances: 1
-  #     imageName: ghcr.io/cloudnative-pg/postgresql:17.0-17
-  #     imagePullPolicy: IfNotPresent
-
-  #     primaryUpdateStrategy: unsupervised
-
-  #     enableSuperuserAccess: true
-  #     superuserSecret: cloudnativepg
-      
-  #     storage:
-  #       size: 2Gi
-  #       storageClass: local-path
-
-  #     monitoring:
-  #       enabled: false
-
-  #     postgresql:
-  #       parameters:
-  #         password_encryption: md5
-  #       pg_hba:
-  #         - host all all all md5
-  #         - host all all 0.0.0.0/0 md5
-
-  #   backups:
-  #     enabled: false
