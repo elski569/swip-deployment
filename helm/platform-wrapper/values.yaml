@@ -3,13 +3,6 @@ sb-swip-platform:
   global:
     ingress:
       enabled: false
-    postgresql:
-      auth:
-        existingSecret: swip-middleware-postgresql  # Use the existing PostgreSQL secret
-        secretKeys:
-          adminPasswordKey: postgresql-password
-          userPasswordKey: postgresql-password
-          replicationPasswordKey: postgresql-password
   
   sb-admin-service:
     enabled: true
@@ -21,15 +14,18 @@ sb-swip-platform:
           keycloak:
             baseUri: http://keycloak.keycloak:8090 #ns.service:port
             baseUris: http://keycloak.keycloak:8090
-    image:
-      tag: latest
-      imagePullPolicy: Always
-    tracing:
-      enabled: false
-    postgresql:
-      auth:
-        existingSecret: swip-middleware-postgresql  # Use the existing PostgreSQL secret
-        passwordKey: postgresql-password  # Match the key in the PostgreSQL secret
+    #image:
+    #  tag: latest
+    #  imagePullPolicy: Always
+    #tracing:
+    #  enabled: false
+    postgres:
+      host: swip-middleware-postgresql  # Point to existing PostgreSQL service
+      port: 5432
+      partiesDatabase: sb_parties
+      authorizationDatabase: sb_authorization
+      # This will make it use the correct secret name
+      fullnameOverride: swip-middleware-postgresql
 
   sb-private-assets:
     enabled: false #bra för test
