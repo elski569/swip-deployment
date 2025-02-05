@@ -75,10 +75,9 @@ sb-swip-platform:
       #   layout:
       #       profile_path: value-bridge
       sb_services:
+        marketdata:
+            enabled: false
         authorization:
-          marketdata:
-            six:
-              enabled: false
           oauth2:
             realm: local
             clientSecret: u4EHBMgAum9dU1a9ohSi6DWsMdimBz3j
