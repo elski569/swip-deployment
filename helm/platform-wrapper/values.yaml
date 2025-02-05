@@ -20,7 +20,7 @@ sb-swip-platform:
       tag: latest
       imagePullPolicy: Always
     postgres:
-      host: swip-middleware-postgresql  # Point to existing PostgreSQL service
+      host: swip-middleware-postgresql
       port: 5432
       # Remove the middleware.suffix setting
       middleware:
@@ -28,6 +28,17 @@ sb-swip-platform:
       # Remove any release name prefix
       fullnameOverride: swip-middleware-postgresql
       releaseName: "" 
+    env:
+      - name: SPRING_DATASOURCE_PARTIES_URL
+        value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_parties"
+      - name: SPRING_DATASOURCE_AUTHORIZATION_URL
+        value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_authorization"
+      - name: SPRING_DATASOURCE_PARTIES_USERNAME
+        value: "postgres"
+      - name: SPRING_DATASOURCE_AUTHORIZATION_USERNAME
+        value: "postgres"
+      - name: SPRING_LIQUIBASE_ENABLED
+        value: "true"
 
   sb-private-assets:
     enabled: false #good for testing later on
@@ -47,7 +58,6 @@ sb-swip-platform:
       type: LoadBalancer
       port: 8093  # External port
       targetPort: 8080  # Container port
-    
     image:
       tag: latest
       imagePullPolicy: Always
@@ -85,7 +95,6 @@ sb-swip-platform:
       server:
         port: 8080
         contextPath: /sb-backend
-
     cloudnativepg:
       enabled: false
     image:
@@ -96,15 +105,20 @@ sb-swip-platform:
       releaseName: local-mw
       cloud:
         enabled: false
+    env:
+      - name: SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS
+        value: "swip-middleware-kafka:9092"
+      - name: SPRING_CLOUD_STREAM_KAFKA_BINDER_AUTOCREATETOPICS
+        value: "true"
+      - name: SWIMBIRD_SERVER_PRIMARY
+        value: "true"
+      - name: SWIMBIRD_RELEASE
+        value: "swip-platform"
     mongodb:
       enabled: true
       releaseName: local-mw
     tracing:
       enabled: false
-    # cache:
-    #   redis:
-    #     # standalone-cache-test in GCP
-    #     host: 10.78.254.203
     monitoring:
       enabled: false
     service:
@@ -136,16 +150,6 @@ sb-swip-platform:
         timeoutSeconds: 1
         periodSeconds: 10
         failureThreshold: 30
-
-    # env:
-    #   - name: SERVER_PORT
-    #     value: "8080"
-    #   - name: SPRING_CLOUD_STREAM_KAFKA_BINDER_AUTOCREATETOPICS
-    #     value: "true"
-    #   - name: SWIMBIRD_SERVER_PRIMARY
-    #     value: "true"
-    #   - name: SWIMBIRD_RELEASE
-    #     value: "swip-platform"
 
   sb-swip-app :
     enabled: true
