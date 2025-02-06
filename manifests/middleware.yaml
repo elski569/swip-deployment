@@ -19,8 +19,6 @@ spec:
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
-      - SkipHooks=true
-      - SkipJobs=true
     automated:
       prune: true
       selfHeal: true
