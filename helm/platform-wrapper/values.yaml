@@ -9,7 +9,7 @@ sb-swip-platform:
   sb-admin-service:
     enabled: true
     cloudnativepg:
-      enabled: true 
+      enabled: false 
       host: swim-rw.cloud-pg
     config:
       swimbird:
@@ -20,6 +20,10 @@ sb-swip-platform:
     image:
       tag: latest
       imagePullPolicy: Always
+    postgres:
+      enabled: true
+    
+
   # postgres:
   #     enabled: false
       # host: swip-middleware-postgresql
