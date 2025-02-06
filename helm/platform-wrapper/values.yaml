@@ -9,7 +9,7 @@ sb-swip-platform:
   sb-admin-service:
     enabled: true
     cloudnativepg:
-      enabled: false 
+      enabled: true 
     config:
       swimbird:
         authorization:
@@ -23,22 +23,22 @@ sb-swip-platform:
       host: swip-middleware-postgresql
       port: 5432
       # Remove the middleware.suffix setting
-      middleware:
-        suffix: ""  # Empty string to prevent adding -mw
-      # Remove any release name prefix
-      fullnameOverride: swip-middleware-postgresql
-      releaseName: "" 
-    env:
-      - name: SPRING_DATASOURCE_PARTIES_URL
-        value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_parties"
-      - name: SPRING_DATASOURCE_AUTHORIZATION_URL
-        value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_authorization"
-      - name: SPRING_DATASOURCE_PARTIES_USERNAME
-        value: "postgres"
-      - name: SPRING_DATASOURCE_AUTHORIZATION_USERNAME
-        value: "postgres"
-      - name: SPRING_LIQUIBASE_ENABLED
-        value: "true"
+      # middleware:
+      #   suffix: ""  # Empty string to prevent adding -mw
+      # # Remove any release name prefix
+      # fullnameOverride: swip-middleware-postgresql
+      # releaseName: "" 
+    # env:
+    #   - name: SPRING_DATASOURCE_PARTIES_URL
+    #     value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_parties"
+    #   - name: SPRING_DATASOURCE_AUTHORIZATION_URL
+    #     value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_authorization"
+    #   - name: SPRING_DATASOURCE_PARTIES_USERNAME
+    #     value: "postgres"
+    #   - name: SPRING_DATASOURCE_AUTHORIZATION_USERNAME
+    #     value: "postgres"
+    #   - name: SPRING_LIQUIBASE_ENABLED
+    #     value: "true"
 
   sb-private-assets:
     enabled: false #good for testing later on
@@ -96,7 +96,7 @@ sb-swip-platform:
         port: 8080
         contextPath: /sb-backend
     cloudnativepg:
-      enabled: false
+      enabled: true
     image:
       tag: latest
       imagePullPolicy: Always
@@ -105,15 +105,15 @@ sb-swip-platform:
       releaseName: local-mw
       cloud:
         enabled: false
-    env:
-      - name: SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS
-        value: "swip-middleware-sb-kafka-svc"  # Updated service name
-      - name: SPRING_CLOUD_STREAM_KAFKA_BINDER_AUTOCREATETOPICS
-        value: "true"
-      - name: SWIMBIRD_SERVER_PRIMARY
-        value: "true"
-      - name: SWIMBIRD_RELEASE
-        value: "swip-platform"
+    # env:
+    #   - name: SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS
+    #     value: "swip-middleware-sb-kafka-svc"  # Updated service name
+    #   - name: SPRING_CLOUD_STREAM_KAFKA_BINDER_AUTOCREATETOPICS
+    #     value: "true"
+    #   - name: SWIMBIRD_SERVER_PRIMARY
+    #     value: "true"
+    #   - name: SWIMBIRD_RELEASE
+    #     value: "swip-platform"
     mongodb:
       enabled: true
       releaseName: local-mw

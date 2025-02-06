@@ -1,0 +1,6 @@
+dependencies:
+- name: sb-swip-platform
+  repository: https://swibi.github.io/sb-helm-repo/
+  version: 12.1.2
+digest: sha256:d407f909792ed2af2db9af7f3b62bddc50871381670229a02c9fceb53f5f788b
+generated: "2025-02-06T10:11:19.12054+01:00"

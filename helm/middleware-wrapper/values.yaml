@@ -1,38 +1,38 @@
 #INspired by sb-local-development/local/sb-swip-middleware.yaml
 sb-swip-middleware:
   # Create secrets for MongoDB and PostgreSQL?????
-  Release:
-    IsInstall: 
-      enabled: true
-  secrets:
-    # MongoDB credentials
-    mongodb:
-      create: true
-      data:
-        username: root
-        password: password
+  # Release:
+  #   IsInstall: 
+  #     enabled: true
+  # secrets:
+  #   # MongoDB credentials
+  #   mongodb:
+  #     create: true
+  #     data:
+  #       username: root
+  #       password: password
     
-    # PostgreSQL credentials
-    postgresql:
-      create: true
-      data:
-        postgres-password: postgres
-        password: postgres
-        username: postgres
+  #   # PostgreSQL credentials
+  #   postgresql:
+  #     create: true
+  #     data:
+  #       postgres-password: postgres
+  #       password: postgres
+  #       username: postgres
 
   cloudnativepg:
-    enabled: false
+    enabled: true
     host: swim-rw.cloud-pg
     user: postgres
     port: 5432
   
   postgresql:
     enabled: true
-    auth:
-      existingSecret: swip-middleware-postgresql
-      secretKeys:
-        adminPasswordKey: postgres
-        userPasswordKey: password
+    # auth:
+    #   existingSecret: swip-middleware-postgresql
+    #   secretKeys:
+    #     adminPasswordKey: postgres
+    #     userPasswordKey: password
     service:
       type: LoadBalancer
     persistence:
@@ -45,10 +45,10 @@ sb-swip-middleware:
 
   mongodb:
     enabled: true
-    auth:
-      existingSecret: mongodb-credentials
-      userKey: username
-      passwordKey: password
+    # auth:
+    #   existingSecret: mongodb-credentials
+    #   userKey: username
+    #   passwordKey: password
     service:
       type: LoadBalancer
     persistence:
