@@ -24,9 +24,9 @@ sb-swip-platform:
           keycloak:
             baseUri: http://keycloak.keycloak:8090 #ns.service:port
             baseUris: http://keycloak.keycloak:8090
-    image:
-      tag: latest
-      imagePullPolicy: Always
+    # image:
+    #   tag: latest
+    #   imagePullPolicy: Always
     env:
       - name: SPRING_DATASOURCE_PARTIES_URL
         value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_parties"
@@ -35,6 +35,10 @@ sb-swip-platform:
       - name: SPRING_DATASOURCE_PARTIES_USERNAME
         value: "postgres"
       - name: SPRING_DATASOURCE_AUTHORIZATION_USERNAME
+        value: "postgres"
+      - name: SPRING_DATASOURCE_PARTIES_PASSWORD
+        value: "postgres"
+      - name: SPRING_DATASOURCE_AUTHORIZATION_PASSWORD
         value: "postgres"
       - name: SPRING_LIQUIBASE_ENABLED
         value: "true"
