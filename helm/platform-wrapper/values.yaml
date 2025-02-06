@@ -11,6 +11,13 @@ sb-swip-platform:
     cloudnativepg:
       enabled: false 
       host: swim-rw.cloud-pg
+    postgres:
+      enabled: true
+      host: swip-middleware-postgresql
+      port: 5432
+      releaseName: swip-middleware
+      middleware:
+        suffix: ""
     config:
       swimbird:
         authorization:
@@ -20,8 +27,17 @@ sb-swip-platform:
     image:
       tag: latest
       imagePullPolicy: Always
-    postgres:
-      enabled: true
+    env:
+      - name: SPRING_DATASOURCE_PARTIES_URL
+        value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_parties"
+      - name: SPRING_DATASOURCE_AUTHORIZATION_URL
+        value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_authorization"
+      - name: SPRING_DATASOURCE_PARTIES_USERNAME
+        value: "postgres"
+      - name: SPRING_DATASOURCE_AUTHORIZATION_USERNAME
+        value: "postgres"
+      - name: SPRING_LIQUIBASE_ENABLED
+        value: "true"
     
 
   # postgres:
@@ -96,7 +112,7 @@ sb-swip-platform:
     #   enabled: false
     #   releaseName: swip-middleware
     cloudnativepg:
-      enabled: true
+      enabled: false
       host: swim-rw.cloud-pg
     sb-kafka:
       enabled: true
