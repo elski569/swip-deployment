@@ -3,13 +3,14 @@ sb-swip-platform:
   global:
     ingress:
       enabled: false
-    monitoring:
-      enabled: false
+    # monitoring:
+    #   enabled: false
   
   sb-admin-service:
     enabled: true
     cloudnativepg:
       enabled: true 
+      host: swim-rw.cloud-pg
     config:
       swimbird:
         authorization:
@@ -19,8 +20,8 @@ sb-swip-platform:
     image:
       tag: latest
       imagePullPolicy: Always
-    postgres:
-      enabled: false
+  # postgres:
+  #     enabled: false
       # host: swip-middleware-postgresql
       # port: 5432
       # releaseName: swip-middleware
@@ -53,20 +54,22 @@ sb-swip-platform:
       imagePullPolicy: Always
     resources:
       default: small
+    ingress:
+      enabled: false
     config:
       sb_services:
         marketdata:
           enabled: false  # Disable all marketdata
-          six:
-            enabled: false 
+          # six:
+          #   enabled: false 
         authorization:
-          # oauth2:
-          #   realm: local
-          #   clientSecret: u4EHBMgAum9dU1a9ohSi6DWsMdimBz3j
+          oauth2:
+            realm: local
+            clientSecret: u4EHBMgAum9dU1a9ohSi6DWsMdimBz3j
           keycloak:
             hostName: localhost
             port: 8090
-          swip_app:
+          swip_app: ##swip app???
             host: localhost
             port: 8090
         layout:
@@ -82,49 +85,50 @@ sb-swip-platform:
           periodSeconds: 300
           initialDelaySeconds: 300
       # Add server port configuration
-      server:
-        port: 8080
-        contextPath: /sb-backend
-    postgresql:
-      enabled: false
-      releaseName: swip-middleware
+      # server:
+      #   port: 8080
+      #   contextPath: /sb-backend
+    # postgresql:
+    #   enabled: false
+    #   releaseName: swip-middleware
     cloudnativepg:
       enabled: true
-    image:
-      tag: latest
-      imagePullPolicy: Always
+      host: swim-rw.cloud-pg
     sb-kafka:
       enabled: true
       releaseName: swip-middleware
       cloud:
         enabled: false
-    env:
-      - name: SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS
-        value: "swip-middleware-sb-kafka-svc"  # Updated service name
-      - name: SPRING_CLOUD_STREAM_KAFKA_BINDER_AUTOCREATETOPICS
-        value: "true"
-      - name: SWIMBIRD_SERVER_PRIMARY
-        value: "true"
-      - name: SWIMBIRD_RELEASE
-        value: "swip-platform"
+    # env:
+    #   - name: SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS
+    #     value: "swip-middleware-sb-kafka-svc"  # Updated service name
+    #   - name: SPRING_CLOUD_STREAM_KAFKA_BINDER_AUTOCREATETOPICS
+    #     value: "true"
+    #   - name: SWIMBIRD_SERVER_PRIMARY
+    #     value: "true"
+    #   - name: SWIMBIRD_RELEASE
+    #     value: "swip-platform"
       
     mongodb:
       enabled: true
       releaseName: swip-middleware
-    tracing:
-      enabled: false
     monitoring:
       enabled: false
     service:
       port: 8093
       type: LoadBalancer
-    containerPorts:
-      - name: http
-        containerPort: 8080
-        protocol: TCP
-      - name: metrics
-        containerPort: 8087
-        protocol: TCP
+    probes:
+      livenessProbe:
+        enabled: false
+      readinessProbe:
+        enabled: false
+    # containerPorts:
+    #   - name: http
+    #     containerPort: 8080
+    #     protocol: TCP
+    #   - name: metrics
+    #     containerPort: 8087
+    #     protocol: TCP
     # probes:
     #   livenessProbe:
     #     enabled: true
@@ -146,7 +150,7 @@ sb-swip-platform:
     #     failureThreshold: 30
 
   sb-swip-app :
-    enabled: true
+    enabled: false
     image:
       tag: latest
       imagePullPolicy: Always

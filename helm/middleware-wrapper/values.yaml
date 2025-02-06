@@ -25,24 +25,27 @@ sb-swip-middleware:
     host: swim-rw.cloud-pg
     port: 5432
     user: postgres
-    password: postgres
-  
+    service:
+      type: LoadBalancer
+   
   postgresql:
     enabled: false
-    # auth:
-    #   existingSecret: swip-middleware-postgresql
-    #   secretKeys:
-    #     adminPasswordKey: postgres
-    #     userPasswordKey: password
-    # service:
-    #   type: LoadBalancer
-    # persistence:
-    #   enabled: true
-    #   size: 1Gi #change size?? orginal 10Gi
-    #   storageClass: local-path 
+    service:
+      type: LoadBalancer
+    persistence:
+      size: 1Gi
+      storageClass: local-path
 
   postgresql-ha:
     enabled: false
+
+  sb-kafka:
+    enabled: true
+
+  sb-keycloak:
+    enabled: true
+    service:
+      type: LoadBalancer 
 
   mongodb:
     enabled: true
@@ -53,20 +56,23 @@ sb-swip-middleware:
     service:
       type: LoadBalancer
     persistence:
-      enabled: true
       storageClass: local-path
       size: 1Gi #testa större size? orginal 8Gi
       
-  sb-kafka:
-    enabled: true
-    kafka:
-      enabled: true
-      service:
-        type: LoadBalancer  
+  # sb-kafka:
+  #   enabled: true
+  #   kafka:
+  #     enabled: true
+  #     service:
+  #       type: LoadBalancer  
 
   cp-helm-charts:
     enabled: false
-  
+    cp-kafka:
+      enabled: false
+    cp-zookeeper:
+      enabled: false
+      
   sb-schema-registry:
     enabled: false  
 
