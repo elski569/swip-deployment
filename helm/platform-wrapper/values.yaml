@@ -150,7 +150,7 @@ sb-swip-platform:
     #     failureThreshold: 30
 
   sb-swip-app :
-    enabled: false
+    enabled: true
     image:
       tag: latest
       imagePullPolicy: Always

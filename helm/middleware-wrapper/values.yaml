@@ -29,7 +29,7 @@ sb-swip-middleware:
       type: LoadBalancer
    
   postgresql:
-    enabled: false
+    enabled: true
     service:
       type: LoadBalancer
     persistence:
@@ -72,7 +72,7 @@ sb-swip-middleware:
       enabled: false
     cp-zookeeper:
       enabled: false
-      
+
   sb-schema-registry:
     enabled: false  
 
