@@ -35,6 +35,7 @@ sb-swip-middleware:
     persistence:
       size: 1Gi
       storageClass: local-path
+    initdbScripts: null
 
   postgresql-ha:
     enabled: false
