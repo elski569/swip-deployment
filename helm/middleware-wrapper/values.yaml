@@ -21,25 +21,27 @@ sb-swip-middleware:
   #       username: postgres
 
   cloudnativepg:
-    enabled: false
-    host: ""    # Empty the host value
-    port: ""    # Empty the port value
-    user: ""    # Empty the user value
-    password: "" # Empty the password value
+    enabled: true
+    host: swim-rw.cloud-pg
+    port: 5432
+    user: postgres
+    password: postgres
+    service:
+      type: LoadBalancer
   
   postgresql:
-    enabled: true
+    enabled: false
     # auth:
     #   existingSecret: swip-middleware-postgresql
     #   secretKeys:
     #     adminPasswordKey: postgres
     #     userPasswordKey: password
-    service:
-      type: LoadBalancer
-    persistence:
-      enabled: true
-      size: 1Gi #change size?? orginal 10Gi
-      storageClass: local-path 
+    # service:
+    #   type: LoadBalancer
+    # persistence:
+    #   enabled: true
+    #   size: 1Gi #change size?? orginal 10Gi
+    #   storageClass: local-path 
 
   postgresql-ha:
     enabled: false

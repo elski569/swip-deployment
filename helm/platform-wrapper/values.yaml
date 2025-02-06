@@ -20,9 +20,10 @@ sb-swip-platform:
       tag: latest
       imagePullPolicy: Always
     postgres:
-      host: swip-middleware-postgresql
-      port: 5432
-      releaseName: swip-middleware
+      enabled: false
+      # host: swip-middleware-postgresql
+      # port: 5432
+      # releaseName: swip-middleware
     #  Remove the middleware.suffix setting
     #   middleware:
     #     suffix: ""  # Empty string to prevent adding -mw
@@ -85,10 +86,10 @@ sb-swip-platform:
         port: 8080
         contextPath: /sb-backend
     postgresql:
-      enabled: true
+      enabled: false
       releaseName: swip-middleware
     cloudnativepg:
-      enabled: false
+      enabled: true
     image:
       tag: latest
       imagePullPolicy: Always
