@@ -143,9 +143,23 @@ sb-swip-platform:
       type: LoadBalancer
     probes:
       livenessProbe:
-        enabled: false
+        enabled: true
+        httpGet:
+          path: /sb-backend/internal/health
+          port: 8080
+        initialDelaySeconds: 180  # Give more time to start
+        timeoutSeconds: 30
+        periodSeconds: 15
+        failureThreshold: 3
       readinessProbe:
-        enabled: false
+        enabled: true
+        httpGet:
+          path: /sb-backend/internal/alive/ping
+          port: 8080
+        initialDelaySeconds: 120  # Give more time to start
+        timeoutSeconds: 1
+        periodSeconds: 10
+        failureThreshold: 30
     # containerPorts:
     #   - name: http
     #     containerPort: 8080
