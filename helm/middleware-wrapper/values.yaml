@@ -30,12 +30,18 @@ sb-swip-middleware:
    
   postgresql:
     enabled: true
+    primary:
+      initdb:
+        enabled: false    # Disable initdb scripts
+        scriptsConfigMap: null  # Remove reference to scripts ConfigMap
+    initdbScripts: null  # Set initdb scripts to null
+    initdbScriptsConfigMap: null  # Remove reference to external ConfigMap
+    initdbScriptsSecret: null  # Remove reference to any secret
     service:
       type: LoadBalancer
     persistence:
       size: 1Gi
       storageClass: local-path
-    initdbScripts: null
 
   postgresql-ha:
     enabled: false
