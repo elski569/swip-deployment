@@ -118,20 +118,22 @@ sb-swip-platform:
     cloudnativepg:
       enabled: false
       host: swim-rw.cloud-pg
+    strimzi:
+      enabled: false
     sb-kafka:
       enabled: true
       releaseName: swip-middleware
       cloud:
         enabled: false
-    # env:
-    #   - name: SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS
-    #     value: "swip-middleware-sb-kafka-svc"  # Updated service name
-    #   - name: SPRING_CLOUD_STREAM_KAFKA_BINDER_AUTOCREATETOPICS
-    #     value: "true"
-    #   - name: SWIMBIRD_SERVER_PRIMARY
-    #     value: "true"
-    #   - name: SWIMBIRD_RELEASE
-    #     value: "swip-platform"
+    env:
+      - name: SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS
+        value: "swip-middleware-sb-kafka-svc"  # Updated service name
+      - name: SPRING_CLOUD_STREAM_KAFKA_BINDER_AUTOCREATETOPICS
+        value: "true"
+      - name: SWIMBIRD_SERVER_PRIMARY
+        value: "true"
+      - name: SWIMBIRD_RELEASE
+        value: "swip-platform"
       
     mongodb:
       enabled: true
