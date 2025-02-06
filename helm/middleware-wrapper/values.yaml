@@ -2,7 +2,8 @@
 sb-swip-middleware:
   # Create secrets for MongoDB and PostgreSQL?????
   Release:
-    IsInstall: false
+    IsInstall: 
+      enabled: false
   secrets:
     # MongoDB credentials
     mongodb:
