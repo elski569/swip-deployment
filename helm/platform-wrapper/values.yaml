@@ -22,35 +22,23 @@ sb-swip-platform:
     postgres:
       host: swip-middleware-postgresql
       port: 5432
-      # Remove the middleware.suffix setting
-      # middleware:
-      #   suffix: ""  # Empty string to prevent adding -mw
-      # # Remove any release name prefix
-      # fullnameOverride: swip-middleware-postgresql
-      # releaseName: "" 
-    # env:
-    #   - name: SPRING_DATASOURCE_PARTIES_URL
-    #     value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_parties"
-    #   - name: SPRING_DATASOURCE_AUTHORIZATION_URL
-    #     value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_authorization"
-    #   - name: SPRING_DATASOURCE_PARTIES_USERNAME
-    #     value: "postgres"
-    #   - name: SPRING_DATASOURCE_AUTHORIZATION_USERNAME
-    #     value: "postgres"
-    #   - name: SPRING_LIQUIBASE_ENABLED
-    #     value: "true"
-
-  sb-private-assets:
-    enabled: false #good for testing later on
-    image:
-      tag: latest
-      imagePullPolicy: Always
-  
-  sb-private-funds: 
-    enabled: false
-    image:
-      tag: latest
-      imagePullPolicy: Always
+      Remove the middleware.suffix setting
+      middleware:
+        suffix: ""  # Empty string to prevent adding -mw
+      # Remove any release name prefix
+      fullnameOverride: swip-middleware-postgresql
+      releaseName: "" 
+    env:
+      - name: SPRING_DATASOURCE_PARTIES_URL
+        value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_parties"
+      - name: SPRING_DATASOURCE_AUTHORIZATION_URL
+        value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_authorization"
+      - name: SPRING_DATASOURCE_PARTIES_USERNAME
+        value: "postgres"
+      - name: SPRING_DATASOURCE_AUTHORIZATION_USERNAME
+        value: "postgres"
+      - name: SPRING_LIQUIBASE_ENABLED
+        value: "true"
 
   sb-standalone:
     enabled: true
@@ -95,28 +83,32 @@ sb-swip-platform:
       server:
         port: 8080
         contextPath: /sb-backend
-    cloudnativepg:
+    postgresql:
       enabled: true
+      releaseName: swip-middleware
+    cloudnativepg:
+      enabled: false
     image:
       tag: latest
       imagePullPolicy: Always
     sb-kafka:
       enabled: true
-      releaseName: local-mw
+      releaseName: swip-middleware
       cloud:
         enabled: false
-    # env:
-    #   - name: SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS
-    #     value: "swip-middleware-sb-kafka-svc"  # Updated service name
-    #   - name: SPRING_CLOUD_STREAM_KAFKA_BINDER_AUTOCREATETOPICS
-    #     value: "true"
-    #   - name: SWIMBIRD_SERVER_PRIMARY
-    #     value: "true"
-    #   - name: SWIMBIRD_RELEASE
-    #     value: "swip-platform"
+    env:
+      - name: SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS
+        value: "swip-middleware-sb-kafka-svc"  # Updated service name
+      - name: SPRING_CLOUD_STREAM_KAFKA_BINDER_AUTOCREATETOPICS
+        value: "true"
+      - name: SWIMBIRD_SERVER_PRIMARY
+        value: "true"
+      - name: SWIMBIRD_RELEASE
+        value: "swip-platform"
+      
     mongodb:
       enabled: true
-      releaseName: local-mw
+      releaseName: swip-middleware
     tracing:
       enabled: false
     monitoring:
@@ -169,6 +161,18 @@ sb-swip-platform:
       globalResourceBasePath:
       USE_LEGACY_ACCOUNT_LIST: "false"
       RESTRICT_DASHBOARD_CHART_VIEW: "false"
+
+  sb-private-assets:
+    enabled: false #good for testing later on
+    image:
+      tag: latest
+      imagePullPolicy: Always
+  
+  sb-private-funds: 
+    enabled: false
+    image:
+      tag: latest
+      imagePullPolicy: Always
 
   sb-accounting:
     enabled: false
