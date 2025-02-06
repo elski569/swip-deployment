@@ -124,25 +124,25 @@ sb-swip-platform:
       - name: metrics
         containerPort: 8087
         protocol: TCP
-    probes:
-      livenessProbe:
-        enabled: true
-        httpGet:
-          path: /sb-backend/internal/health
-          port: 8080
-        initialDelaySeconds: 180  # Give more time to start
-        timeoutSeconds: 30
-        periodSeconds: 15
-        failureThreshold: 3
-      readinessProbe:
-        enabled: true
-        httpGet:
-          path: /sb-backend/internal/alive/ping
-          port: 8080
-        initialDelaySeconds: 120  # Give more time to start
-        timeoutSeconds: 1
-        periodSeconds: 10
-        failureThreshold: 30
+    # probes:
+    #   livenessProbe:
+    #     enabled: true
+    #     httpGet:
+    #       path: /sb-backend/internal/health
+    #       port: 8080
+    #     initialDelaySeconds: 180  # Give more time to start
+    #     timeoutSeconds: 30
+    #     periodSeconds: 15
+    #     failureThreshold: 3
+    #   readinessProbe:
+    #     enabled: true
+    #     httpGet:
+    #       path: /sb-backend/internal/alive/ping
+    #       port: 8080
+    #     initialDelaySeconds: 120  # Give more time to start
+    #     timeoutSeconds: 1
+    #     periodSeconds: 10
+    #     failureThreshold: 30
 
   sb-swip-app :
     enabled: true
