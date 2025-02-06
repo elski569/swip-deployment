@@ -108,10 +108,10 @@ sb-swip-platform:
           failureThreshold: 100
           periodSeconds: 300
           initialDelaySeconds: 300
-      # Add server port configuration
-      # server:
-      #   port: 8080
-      #   contextPath: /sb-backend
+      #Add server port configuration
+      server:
+        port: 8080
+        contextPath: /sb-backend
     # postgresql:
     #   enabled: false
     #   releaseName: swip-middleware
@@ -142,24 +142,24 @@ sb-swip-platform:
       port: 8093
       type: LoadBalancer
     probes:
-      livenessProbe:
-        enabled: true
-        httpGet:
-          path: /sb-backend/internal/health
-          port: 8080
-        initialDelaySeconds: 180  # Give more time to start
-        timeoutSeconds: 30
-        periodSeconds: 15
-        failureThreshold: 3
       readinessProbe:
         enabled: true
         httpGet:
           path: /sb-backend/internal/alive/ping
           port: 8080
-        initialDelaySeconds: 120  # Give more time to start
+        initialDelaySeconds: 180  # Increased from 40s to 180s to give more startup time
         timeoutSeconds: 1
         periodSeconds: 10
         failureThreshold: 30
+      livenessProbe:
+        enabled: true
+        httpGet:
+          path: /sb-backend/internal/health
+          port: 8080
+        initialDelaySeconds: 180  # Increased from 120s to 180s
+        timeoutSeconds: 30
+        periodSeconds: 15
+        failureThreshold: 3
     # containerPorts:
     #   - name: http
     #     containerPort: 8080
