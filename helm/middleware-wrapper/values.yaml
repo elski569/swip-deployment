@@ -27,6 +27,25 @@ sb-swip-middleware:
     user: postgres
     service:
       type: LoadBalancer
+    cluster:
+      fullnameOverride: "swim"
+      instances: 1
+      imageName: ghcr.io/cloudnative-pg/postgresql:15.0-15
+      imagePullPolicy: IfNotPresent
+      primaryUpdateStrategy: unsupervised
+      enableSuperuserAccess: true
+      superuserSecret: cloudnativepg
+      storage:
+        size: 2Gi
+        storageClass: local-path
+      monitoring:
+        enabled: false
+      postgresql:
+        parameters:
+          password_encryption: md5
+        pg_hba:
+          - host all all all md5
+          - host all all 0.0.0.0/0 md5
    
   postgresql:
     enabled: true
@@ -48,11 +67,10 @@ sb-swip-middleware:
 
   sb-kafka:
     enabled: true
-
-  sb-keycloak:
-    enabled: true
-    service:
-      type: LoadBalancer 
+    kafka:
+      enabled: true
+      service:
+        type: LoadBalancer  
 
   mongodb:
     enabled: true
@@ -65,13 +83,6 @@ sb-swip-middleware:
     persistence:
       storageClass: local-path
       size: 1Gi #testa större size? orginal 8Gi
-      
-  # sb-kafka:
-  #   enabled: true
-  #   kafka:
-  #     enabled: true
-  #     service:
-  #       type: LoadBalancer  
 
   cp-helm-charts:
     enabled: false
