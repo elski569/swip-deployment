@@ -21,10 +21,11 @@ sb-swip-middleware:
   #       username: postgres
 
   cloudnativepg:
-    enabled: true
-    host: swim-rw.cloud-pg
-    user: postgres
-    port: 5432
+    enabled: false
+    host: ""    # Empty the host value
+    port: ""    # Empty the port value
+    user: ""    # Empty the user value
+    password: "" # Empty the password value
   
   postgresql:
     enabled: true
