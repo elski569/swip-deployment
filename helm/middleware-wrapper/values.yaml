@@ -1,66 +1,20 @@
 #INspired by sb-local-development/local/sb-swip-middleware.yaml
 sb-swip-middleware:
-  # Create secrets for MongoDB and PostgreSQL?????
-  # Release:
-  #   IsInstall: 
-  #     enabled: true
-  # secrets:
-  #   # MongoDB credentials
-  #   mongodb:
-  #     create: true
-  #     data:
-  #       username: root
-  #       password: password
-    
-  #   # PostgreSQL credentials
-  #   postgresql:
-  #     create: true
-  #     data:
-  #       postgres-password: postgres
-  #       password: postgres
-  #       username: postgres
 
   cloudnativepg:
-    enabled: true
+    enabled: false
     host: swim-rw.cloud-pg
     port: 5432
     user: postgres
     service:
       type: LoadBalancer
-    cluster:
-      fullnameOverride: "swim"
-      instances: 1
-      imageName: ghcr.io/cloudnative-pg/postgresql:15.0-15
-      imagePullPolicy: IfNotPresent
-      primaryUpdateStrategy: unsupervised
-      enableSuperuserAccess: true
-      superuserSecret: cloudnativepg
-      storage:
-        size: 2Gi
-        storageClass: local-path
-      monitoring:
-        enabled: false
-      postgresql:
-        parameters:
-          password_encryption: md5
-        pg_hba:
-          - host all all all md5
-          - host all all 0.0.0.0/0 md5
-   
+    
   postgresql:
     enabled: true
-    primary:
-      initdb:
-        enabled: false    # Disable initdb scripts
-        scriptsConfigMap: null  # Remove reference to scripts ConfigMap
-    initdbScripts: null  # Set initdb scripts to null
-    initdbScriptsConfigMap: null  # Remove reference to external ConfigMap
-    initdbScriptsSecret: null  # Remove reference to any secret
     service:
       type: LoadBalancer
     persistence:
       size: 1Gi
-      storageClass: local-path
 
   postgresql-ha:
     enabled: false
@@ -81,7 +35,6 @@ sb-swip-middleware:
     service:
       type: LoadBalancer
     persistence:
-      storageClass: local-path
       size: 1Gi #testa större size? orginal 8Gi
 
   cp-helm-charts:

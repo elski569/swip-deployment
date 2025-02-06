@@ -7,6 +7,6 @@ version: 0.1.0
 dependencies:
   # Main middleware chart
   - name: sb-swip-middleware
-    version: 2.6.2
+    version: 2.6.3-SWIM-6334
     repository: https://swibi.github.io/sb-helm-repo/
  
