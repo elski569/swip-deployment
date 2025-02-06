@@ -22,23 +22,24 @@ sb-swip-platform:
     postgres:
       host: swip-middleware-postgresql
       port: 5432
-      Remove the middleware.suffix setting
-      middleware:
-        suffix: ""  # Empty string to prevent adding -mw
-      # Remove any release name prefix
-      fullnameOverride: swip-middleware-postgresql
-      releaseName: "" 
-    env:
-      - name: SPRING_DATASOURCE_PARTIES_URL
-        value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_parties"
-      - name: SPRING_DATASOURCE_AUTHORIZATION_URL
-        value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_authorization"
-      - name: SPRING_DATASOURCE_PARTIES_USERNAME
-        value: "postgres"
-      - name: SPRING_DATASOURCE_AUTHORIZATION_USERNAME
-        value: "postgres"
-      - name: SPRING_LIQUIBASE_ENABLED
-        value: "true"
+      releaseName: swip-middleware
+    #  Remove the middleware.suffix setting
+    #   middleware:
+    #     suffix: ""  # Empty string to prevent adding -mw
+    #   Remove any release name prefix
+    #   fullnameOverride: swip-middleware-postgresql
+    #   releaseName: "" 
+    # env:
+    #   - name: SPRING_DATASOURCE_PARTIES_URL
+    #     value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_parties"
+    #   - name: SPRING_DATASOURCE_AUTHORIZATION_URL
+    #     value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_authorization"
+    #   - name: SPRING_DATASOURCE_PARTIES_USERNAME
+    #     value: "postgres"
+    #   - name: SPRING_DATASOURCE_AUTHORIZATION_USERNAME
+    #     value: "postgres"
+    #   - name: SPRING_LIQUIBASE_ENABLED
+    #     value: "true"
 
   sb-standalone:
     enabled: true
