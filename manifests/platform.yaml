@@ -9,7 +9,7 @@ spec:
     namespace: local
     server: https://kubernetes.default.svc
   source:
-    repoURL: https://github.com/elski569/swip-deployment/
+    repoURL: https://github.com/elski569/swip-deployment.git
     path: helm/platform-wrapper
     targetRevision: HEAD
     helm:
