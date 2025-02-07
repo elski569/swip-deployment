@@ -144,24 +144,25 @@ sb-swip-platform:
       port: 8093
       type: LoadBalancer
     probes:
-      readinessProbe:
-        enabled: true
-        httpGet:
-          path: /sb-backend/internal/alive/ping
-          port: 8080
-        initialDelaySeconds: 180  # Increased from 40s to 180s to give more startup time
-        timeoutSeconds: 1
-        periodSeconds: 10
-        failureThreshold: 30
-      livenessProbe:
-        enabled: true
-        httpGet:
-          path: /sb-backend/internal/health
-          port: 8080
-        initialDelaySeconds: 180  # Increased from 120s to 180s
-        timeoutSeconds: 30
-        periodSeconds: 15
-        failureThreshold: 3
+      enabled: false
+    #   readinessProbe:
+    #     enabled: true
+    #     httpGet:
+    #       path: /sb-backend/internal/alive/ping
+    #       port: 8080
+    #     initialDelaySeconds: 180  # Increased from 40s to 180s to give more startup time
+    #     timeoutSeconds: 1
+    #     periodSeconds: 10
+    #     failureThreshold: 30
+    #   livenessProbe:
+    #     enabled: true
+    #     httpGet:
+    #       path: /sb-backend/internal/health
+    #       port: 8080
+    #     initialDelaySeconds: 180  # Increased from 120s to 180s
+    #     timeoutSeconds: 30
+    #     periodSeconds: 15
+    #     failureThreshold: 3
     # containerPorts:
     #   - name: http
     #     containerPort: 8080
@@ -189,7 +190,7 @@ sb-swip-platform:
     #     periodSeconds: 10
     #     failureThreshold: 30
 
-  sb-swip-app :
+  sb-swip-app:
     enabled: true
     image:
       tag: latest
@@ -204,9 +205,10 @@ sb-swip-platform:
       peFundsBackendPort: 8091
       privateAssetsBackendPort: 8092
       USE_GLOBAL_ACCOUNT_SELECTOR_REPLACE: true
-      globalResourceBasePath:
+      globalResourceBasePath: ""
       USE_LEGACY_ACCOUNT_LIST: "false"
       RESTRICT_DASHBOARD_CHART_VIEW: "false"
+      documentsBaseUrl: "http://localhost:8080/document-service"  # Changed to use a simpler URL format
 
   sb-private-assets:
     enabled: false #good for testing later on
