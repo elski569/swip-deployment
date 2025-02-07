@@ -1,6 +1,0 @@
-dependencies:
-- name: sb-swip-middleware
-  repository: https://swibi.github.io/sb-helm-repo/
-  version: 2.6.3-SWIM-6334
-digest: sha256:c36b3b62564611f8a012b54bdfbe643350ff41eed2a44abbf336d787ee565b16
-generated: "2025-02-06T14:46:41.295853+01:00"
