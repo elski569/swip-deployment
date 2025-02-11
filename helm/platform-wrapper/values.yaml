@@ -45,7 +45,7 @@ sb-swip-platform:
    
 
   sb-standalone:
-    enabled: false
+    enabled: true
     image:
       tag: latest
       imagePullPolicy: Always
