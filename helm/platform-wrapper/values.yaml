@@ -22,15 +22,8 @@ sb-swip-platform:
     # jdbc:postgresql://{{ include "postgres.fullname" . }}:{{ .Values.postgres.port }}/{{ .Values.postgres.partiesDatabase }}
     # Example default config: jdbc:postgresql://yourreleasename-mw-postgresql:5432/sb_parties
     # --> swip-platform-swip-middleware-postgresql.local
-    middleware:
-      suffix: "swip-middleware"
     postgres:
       enabled: true
-      host: "postgresql.local"
-      port: 5432
-      fullnameOverride: "swip-middleware-postgresql.local"
-      secretName: "swip-middleware-postgresql" 
-      releaseName: "" #doesn't remove swip-platform 
 
     config:
       swimbird:
@@ -41,7 +34,7 @@ sb-swip-platform:
     # image:
     #   tag: latest
     #   imagePullPolicy: Always
-    # env:
+    #env:
     #   - name: SPRING_DATASOURCE_PARTIES_URL
     #     value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_parties"
     #   - name: SPRING_DATASOURCE_AUTHORIZATION_URL
