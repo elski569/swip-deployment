@@ -13,14 +13,6 @@ sb-swip-middleware:
     enabled: true
     service:
       type: LoadBalancer
-    # primary:
-    #   initdb:
-    #     scripts:
-    #       create-databases.sql: |
-    #         CREATE DATABASE sb_parties;
-    #         CREATE DATABASE sb_authorization;
-    # auth:
-    #   postgresPassword: ""  # Let Helm manage the password
     persistence:
       size: 1Gi
 
@@ -36,10 +28,6 @@ sb-swip-middleware:
 
   mongodb:
     enabled: true
-    # auth:
-    #   existingSecret: mongodb-credentials
-    #   userKey: username
-    #   passwordKey: password
     service:
       type: LoadBalancer
     persistence:

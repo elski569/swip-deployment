@@ -22,7 +22,7 @@ sb-swip-platform:
       enabled: true
       host: swip-middleware-postgresql.local
       port: 5432
-      #releaseName: swip-middleware
+      releaseName:""
       middleware:
         suffix: ""
     config:
