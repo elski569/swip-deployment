@@ -21,14 +21,15 @@ sb-swip-platform:
     # These properties will be used to generate postgres connection strings for jdbc:
     # jdbc:postgresql://{{ include "postgres.fullname" . }}:{{ .Values.postgres.port }}/{{ .Values.postgres.partiesDatabase }}
     # Example default config: jdbc:postgresql://yourreleasename-mw-postgresql:5432/sb_parties
+    # --> swip-platform-swip-middleware-postgresql.local
+    middleware:
+      suffix: "swip-middleware"
     postgres:
       enabled: true
-      host: swip-middleware-postgresql
+      host: "postgresql.local"
       port: 5432
-      fullnameOverride: swip-middleware-postgresql.local 
+      fullnameOverride: "swip-middleware-postgresql.local" 
       releaseName: "" #doesn't remove swip-platform 
-    middleware:
-      suffix: ""
     config:
       swimbird:
         authorization:
