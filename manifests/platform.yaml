@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: swip-platform
+  name: elsa
   namespace: argocd
 spec:
   project: default
