@@ -1,4 +1,10 @@
 #INspired by sb-local-development/local/sb-swip-platform.yaml
+
+#ERROR: connection issues with postgresql - HikariCP errors
+#keycloak-admin-settings secret (for OAUTH2 settings)
+#swip-platform-mw-postgresql secret
+#swip-middleware-swip-middleware-postgresql:5432
+
 sb-swip-platform:
   global:
     ingress:
@@ -6,6 +12,7 @@ sb-swip-platform:
     # monitoring:
     #   enabled: false
   
+
   sb-admin-service:
     enabled: true
     cloudnativepg:
@@ -15,7 +22,7 @@ sb-swip-platform:
       enabled: true
       host: swip-middleware-postgresql
       port: 5432
-      releaseName: swip-middleware
+      #releaseName: swip-middleware
       middleware:
         suffix: ""
     config:
