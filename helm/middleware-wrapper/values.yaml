@@ -27,12 +27,10 @@ sb-swip-middleware:
       persistence:
         storageClass: local-path
         size: 1Gi
-      brokers: 1
     cp-zookeeper:
       persistence:
         dataDirSize: 1Gi
         dataDirStorageClass: local-path
         dataLogDirSize: 1Gi
-      servers: 1
     cp-schema-registry:
       enabled: true
