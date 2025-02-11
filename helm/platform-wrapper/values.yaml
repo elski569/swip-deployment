@@ -19,6 +19,20 @@ sb-swip-platform:
     postgres:
       enabled: true
 
+    liveness:
+      path: /internal/actuator/health
+      failureThreshold: 100000  # Very high threshold to effectively never fail
+      periodSeconds: 300        # Check very infrequently
+      initialDelaySeconds: 10   # Start checking quickly
+      timeoutSeconds: 30        # Long timeout to prevent false failures
+
+    readiness:
+      path: /internal/actuator/health
+      failureThreshold: 3
+      periodSeconds: 5          # Check frequently
+      initialDelaySeconds: 5    # Start checking quickly
+      timeoutSeconds: 3
+
     config:
       swimbird:
         authorization:
