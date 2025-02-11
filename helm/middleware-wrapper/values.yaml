@@ -11,37 +11,28 @@ sb-swip-middleware:
     
   postgresql:
     enabled: true
-    service:
-      type: LoadBalancer
     persistence:
       storageClass: local-path
       size: 1Gi
 
-  postgresql-ha:
-    enabled: false
-
-  sb-kafka:
-    enabled: true
-    kafka:
-      enabled: true
-      service:
-        type: LoadBalancer  
-
   mongodb:
     enabled: true
-    service:
-      type: LoadBalancer
     persistence:
       storageClass: local-path
       size: 1Gi #testa större size? orginal 8Gi
 
   cp-helm-charts:
-    enabled: false
+    enabled: true
     cp-kafka:
-      enabled: false
+      persistence:
+        storageClass: local-path
+        size: 1Gi
+      brokers: 1
     cp-zookeeper:
-      enabled: false
-
-  sb-schema-registry:
-    enabled: false  
-
+      persistence:
+        dataDirSize: 1Gi
+        dataDirStorageClass: local-path
+        dataLogDirSize: 1Gi
+      servers: 1
+    cp-schema-registry:
+      enabled: true
