@@ -22,33 +22,33 @@ sb-swip-platform:
       enabled: true
       host: swip-middleware-postgresql
       port: 5432
-      #releaseName: swip-middleware
+      releaseName: swip-middleware
       middleware:
         suffix: ""
     config:
       swimbird:
         authorization:
           keycloak:
-            baseUri: http://keycloak.keycloak:8090 #ns.service:port
+            baseUri: http://keycloak.keycloak:8090
             baseUris: http://keycloak.keycloak:8090
     # image:
     #   tag: latest
     #   imagePullPolicy: Always
-    env:
-      - name: SPRING_DATASOURCE_PARTIES_URL
-        value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_parties"
-      - name: SPRING_DATASOURCE_AUTHORIZATION_URL
-        value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_authorization"
-      - name: SPRING_DATASOURCE_PARTIES_USERNAME
-        value: "postgres"
-      - name: SPRING_DATASOURCE_AUTHORIZATION_USERNAME
-        value: "postgres"
-      - name: SPRING_DATASOURCE_PARTIES_PASSWORD
-        value: "postgres"
-      - name: SPRING_DATASOURCE_AUTHORIZATION_PASSWORD
-        value: "postgres"
-      - name: SPRING_LIQUIBASE_ENABLED
-        value: "true"
+    # env:
+    #   - name: SPRING_DATASOURCE_PARTIES_URL
+    #     value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_parties"
+    #   - name: SPRING_DATASOURCE_AUTHORIZATION_URL
+    #     value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_authorization"
+    #   - name: SPRING_DATASOURCE_PARTIES_USERNAME
+    #     value: "postgres"
+    #   - name: SPRING_DATASOURCE_AUTHORIZATION_USERNAME
+    #     value: "postgres"
+    #   - name: SPRING_DATASOURCE_PARTIES_PASSWORD
+    #     value: "postgres"
+    #   - name: SPRING_DATASOURCE_AUTHORIZATION_PASSWORD
+    #     value: "postgres"
+    #   - name: SPRING_LIQUIBASE_ENABLED
+    #     value: "true"
     
 
   # postgres:
