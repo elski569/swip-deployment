@@ -18,13 +18,16 @@ sb-swip-platform:
     cloudnativepg:
       enabled: false 
       host: swim-rw.cloud-pg
+    # These properties will be used to generate postgres connection strings for jdbc:
+    # jdbc:postgresql://{{ include "postgres.fullname" . }}:{{ .Values.postgres.port }}/{{ .Values.postgres.partiesDatabase }}
+    # Example default config: jdbc:postgresql://yourreleasename-mw-postgresql:5432/sb_parties
     postgres:
       enabled: true
-      host: postgresql
+      host: swip-middleware-postgresql
       port: 5432
-      releaseName: swip-middleware
-      middleware:
-        suffix: ""
+      releaseName: 
+    middleware:
+      suffix: ""
     config:
       swimbird:
         authorization:
