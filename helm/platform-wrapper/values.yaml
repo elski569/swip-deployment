@@ -49,27 +49,27 @@ sb-swip-platform:
     #     value: "postgres"
     #   - name: SPRING_LIQUIBASE_ENABLED
     #     value: "true"
-    env:
-      - name: SPRING_DATASOURCE_PARTIES_URL
-        value: "jdbc:postgresql://swip-middleware-postgresql.local:5432/sb_parties"
-      - name: SPRING_DATASOURCE_AUTHORIZATION_URL
-        value: "jdbc:postgresql://swip-middleware-postgresql.local:5432/sb_authorization"
-      - name: SPRING_DATASOURCE_PARTIES_USERNAME
-        value: "postgres"
-      - name: SPRING_DATASOURCE_AUTHORIZATION_USERNAME
-        value: "postgres"
-      - name: SPRING_DATASOURCE_PARTIES_PASSWORD
-        valueFrom:
-          secretKeyRef:
-            name: swip-middleware-postgresql
-            key: postgresql-password
-      - name: SPRING_DATASOURCE_AUTHORIZATION_PASSWORD
-        valueFrom:
-          secretKeyRef:
-            name: swip-middleware-postgresql
-            key: postgresql-password
-      - name: SPRING_LIQUIBASE_ENABLED
-        value: "true"
+    # env:
+    #   - name: SPRING_DATASOURCE_PARTIES_URL
+    #     value: "jdbc:postgresql://swip-middleware-postgresql.local:5432/sb_parties"
+    #   - name: SPRING_DATASOURCE_AUTHORIZATION_URL
+    #     value: "jdbc:postgresql://swip-middleware-postgresql.local:5432/sb_authorization"
+    #   - name: SPRING_DATASOURCE_PARTIES_USERNAME
+    #     value: "postgres"
+    #   - name: SPRING_DATASOURCE_AUTHORIZATION_USERNAME
+    #     value: "postgres"
+    #   - name: SPRING_DATASOURCE_PARTIES_PASSWORD
+    #     valueFrom:
+    #       secretKeyRef:
+    #         name: swip-middleware-postgresql
+    #         key: postgresql-password
+    #   - name: SPRING_DATASOURCE_AUTHORIZATION_PASSWORD
+    #     valueFrom:
+    #       secretKeyRef:
+    #         name: swip-middleware-postgresql
+    #         key: postgresql-password
+    #   - name: SPRING_LIQUIBASE_ENABLED
+    #     value: "true"
     
 
   # postgres:
