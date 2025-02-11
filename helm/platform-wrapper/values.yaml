@@ -28,8 +28,10 @@ sb-swip-platform:
       enabled: true
       host: "postgresql.local"
       port: 5432
-      fullnameOverride: "swip-middleware-postgresql.local" 
+      fullnameOverride: "swip-middleware-postgresql.local"
+      secretName: "swip-middleware-postgresql" 
       releaseName: "" #doesn't remove swip-platform 
+
     config:
       swimbird:
         authorization:
