@@ -1,10 +1,5 @@
 #INspired by sb-local-development/local/sb-swip-platform.yaml
 
-#ERROR: connection issues with postgresql - HikariCP errors
-#keycloak-admin-settings secret (for OAUTH2 settings)
-#swip-platform-mw-postgresql secret
-#swip-middleware-swip-middleware-postgresql:5432
-
 sb-swip-platform:
   global:
     ingress:
@@ -12,7 +7,6 @@ sb-swip-platform:
     # monitoring:
     #   enabled: false
   
-
   sb-admin-service:
     enabled: true
     cloudnativepg:
@@ -34,66 +28,7 @@ sb-swip-platform:
     # image:
     #   tag: latest
     #   imagePullPolicy: Always
-    #env:
-    #   - name: SPRING_DATASOURCE_PARTIES_URL
-    #     value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_parties"
-    #   - name: SPRING_DATASOURCE_AUTHORIZATION_URL
-    #     value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_authorization"
-    #   - name: SPRING_DATASOURCE_PARTIES_USERNAME
-    #     value: "postgres"
-    #   - name: SPRING_DATASOURCE_AUTHORIZATION_USERNAME
-    #     value: "postgres"
-    #   - name: SPRING_DATASOURCE_PARTIES_PASSWORD
-    #     value: "postgres"
-    #   - name: SPRING_DATASOURCE_AUTHORIZATION_PASSWORD
-    #     value: "postgres"
-    #   - name: SPRING_LIQUIBASE_ENABLED
-    #     value: "true"
-    # env:
-    #   - name: SPRING_DATASOURCE_PARTIES_URL
-    #     value: "jdbc:postgresql://swip-middleware-postgresql.local:5432/sb_parties"
-    #   - name: SPRING_DATASOURCE_AUTHORIZATION_URL
-    #     value: "jdbc:postgresql://swip-middleware-postgresql.local:5432/sb_authorization"
-    #   - name: SPRING_DATASOURCE_PARTIES_USERNAME
-    #     value: "postgres"
-    #   - name: SPRING_DATASOURCE_AUTHORIZATION_USERNAME
-    #     value: "postgres"
-    #   - name: SPRING_DATASOURCE_PARTIES_PASSWORD
-    #     valueFrom:
-    #       secretKeyRef:
-    #         name: swip-middleware-postgresql
-    #         key: postgresql-password
-    #   - name: SPRING_DATASOURCE_AUTHORIZATION_PASSWORD
-    #     valueFrom:
-    #       secretKeyRef:
-    #         name: swip-middleware-postgresql
-    #         key: postgresql-password
-    #   - name: SPRING_LIQUIBASE_ENABLED
-    #     value: "true"
-    
-
-  # postgres:
-  #     enabled: false
-      # host: swip-middleware-postgresql
-      # port: 5432
-      # releaseName: swip-middleware
-    #  Remove the middleware.suffix setting
-    #   middleware:
-    #     suffix: ""  # Empty string to prevent adding -mw
-    #   Remove any release name prefix
-    #   fullnameOverride: swip-middleware-postgresql
-    #   releaseName: "" 
-    # env:
-    #   - name: SPRING_DATASOURCE_PARTIES_URL
-    #     value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_parties"
-    #   - name: SPRING_DATASOURCE_AUTHORIZATION_URL
-    #     value: "jdbc:postgresql://swip-middleware-postgresql:5432/sb_authorization"
-    #   - name: SPRING_DATASOURCE_PARTIES_USERNAME
-    #     value: "postgres"
-    #   - name: SPRING_DATASOURCE_AUTHORIZATION_USERNAME
-    #     value: "postgres"
-    #   - name: SPRING_LIQUIBASE_ENABLED
-    #     value: "true"
+   
 
   sb-standalone:
     enabled: true

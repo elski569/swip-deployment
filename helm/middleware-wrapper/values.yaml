@@ -3,17 +3,18 @@ sb-swip-middleware:
 
   cloudnativepg:
     enabled: false
-    host: swim-rw.cloud-pg
-    port: 5432
-    user: postgres
-    service:
-      type: LoadBalancer
+    # host: swim-rw.cloud-pg
+    # port: 5432
+    # user: postgres
+    # service:
+    #   type: LoadBalancer
     
   postgresql:
     enabled: true
     service:
       type: LoadBalancer
     persistence:
+      storageClass: local-path
       size: 1Gi
 
   postgresql-ha:
@@ -31,6 +32,7 @@ sb-swip-middleware:
     service:
       type: LoadBalancer
     persistence:
+      storageClass: local-path
       size: 1Gi #testa större size? orginal 8Gi
 
   cp-helm-charts:
