@@ -20,9 +20,9 @@ sb-swip-platform:
       host: swim-rw.cloud-pg
     postgres:
       enabled: true
-      host: swip-middleware-postgresql.local
+      host: postgresql
       port: 5432
-      releaseName: ""
+      releaseName: swip-middleware
       middleware:
         suffix: ""
     config:
