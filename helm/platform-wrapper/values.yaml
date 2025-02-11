@@ -8,7 +8,7 @@ sb-swip-platform:
     #   enabled: false
   
   sb-admin-service:
-    enabled: false
+    enabled: true
     cloudnativepg:
       enabled: false 
       host: swim-rw.cloud-pg
@@ -52,21 +52,6 @@ sb-swip-platform:
             clinetProtocol: https
         layout:
           profile_path: value-bridge
-        liveness:
-          enabled: true
-          failureThreshold: 1000
-          periodSeconds: 10
-          initialDelaySeconds: 300
-        readiness:
-          enabled: true
-          failureThreshold: 1000
-          periodSeconds: 10
-          initialDelaySeconds: 300
-    cloudnativepg:
-      enabled: false
-      host: swim-rw.cloud-pg
-    strimzi:
-      enabled: false
     monitoring:
       enabled: false
 
